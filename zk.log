@@ -1,0 +1,90 @@
+2024-02-21 16:30:49,019:28626(0x7f98923c2640):ZOO_INFO@log_env@1104: Client environment:zookeeper.version=zookeeper C client 3.5.9
+2024-02-21 16:30:49,019:28626(0x7f98923c2640):ZOO_INFO@log_env@1108: Client environment:host.name=mlxlabxkw73sis65c045e7-20240205022023-xcib3h-8aps3n-worker
+2024-02-21 16:30:49,019:28626(0x7f98923c2640):ZOO_INFO@log_env@1115: Client environment:os.name=Linux
+2024-02-21 16:30:49,019:28626(0x7f98923c2640):ZOO_INFO@log_env@1116: Client environment:os.arch=5.4.143.bsk.8-amd64
+2024-02-21 16:30:49,019:28626(0x7f98923c2640):ZOO_INFO@log_env@1117: Client environment:os.version=#5.4.143.bsk.8 SMP Debian 5.4.143.bsk.8 Wed Jul 20 08:41:57 UTC 
+2024-02-21 16:30:49,019:28626(0x7f98923c2640):ZOO_INFO@log_env@1125: Client environment:user.name=(null)
+2024-02-21 16:30:49,020:28626(0x7f98923c2640):ZOO_INFO@log_env@1133: Client environment:user.home=/root
+2024-02-21 16:30:49,020:28626(0x7f98923c2640):ZOO_INFO@log_env@1145: Client environment:user.dir=/mnt/bn/shuaizzz/hpc/ecom_embedding_for_refusal/code_base/FlagEmbedding
+2024-02-21 16:30:49,020:28626(0x7f98923c2640):ZOO_INFO@zookeeper_init_internal@1188: Initiating client connection, host=10.160.20.162:2181,fdbd:dc05:0:47::133:2181,10.160.23.141:2181,10.160.24.22:2181,fdbd:dc05:0:31::141:2181,10.160.20.155:2181,fdbd:dc05:0:19::162:2181,10.160.27.133:2181,fdbd:dc05:0:19::155:2181,fdbd:dc05:0:33::22:2181 sessionTimeout=6000 watcher=0x7f9896270f10 sessionId=0 sessionPasswd=<null> context=0x7f98913c1140 flags=0
+2024-02-21 16:30:49,023:28626(0x7f983617f700):ZOO_INFO@check_events@2477: initiated connection to server [10.160.20.155:2181]
+2024-02-21 16:30:49,025:28626(0x7f983617f700):ZOO_INFO@check_events@2529: session establishment complete on server [10.160.20.155:2181], sessionId=0x650250eb839cfa21, negotiated timeout=10000 
+2024-02-21 16:30:51,704:28626(0x7f98923c2640):ZOO_INFO@zookeeper_close@3335: Closing zookeeper sessionId=0x650250eb839cfa21 to [10.160.20.155:2181]
+
+2024-02-21 16:30:51,707:28626(0x7f98923c2640):ZOO_INFO@zookeeper_close@3357: Freeing zookeeper resources for sessionId=0x650250eb839cfa21
+
+2024-03-28 11:40:48,896:1625(0x7f6a61d8c640):ZOO_INFO@log_env@1104: Client environment:zookeeper.version=zookeeper C client 3.5.9
+2024-03-28 11:40:48,896:1625(0x7f6a61d8c640):ZOO_INFO@log_env@1108: Client environment:host.name=mlxlabxkw73sis65c045e7-20240205022023-xcib3h-x0udrt-worker
+2024-03-28 11:40:48,896:1625(0x7f6a61d8c640):ZOO_INFO@log_env@1115: Client environment:os.name=Linux
+2024-03-28 11:40:48,896:1625(0x7f6a61d8c640):ZOO_INFO@log_env@1116: Client environment:os.arch=5.4.143.bsk.8-amd64
+2024-03-28 11:40:48,896:1625(0x7f6a61d8c640):ZOO_INFO@log_env@1117: Client environment:os.version=#5.4.143.bsk.8 SMP Debian 5.4.143.bsk.8 Wed Jul 20 08:41:57 UTC 
+2024-03-28 11:40:48,896:1625(0x7f6a61d8c640):ZOO_INFO@log_env@1125: Client environment:user.name=(null)
+2024-03-28 11:40:48,897:1625(0x7f6a61d8c640):ZOO_INFO@log_env@1133: Client environment:user.home=/root
+2024-03-28 11:40:48,897:1625(0x7f6a61d8c640):ZOO_INFO@log_env@1145: Client environment:user.dir=/mnt/bn/shuaizzz/hpc/ecom_embedding_for_refusal/code_base/FlagEmbedding
+2024-03-28 11:40:48,897:1625(0x7f6a61d8c640):ZOO_INFO@zookeeper_init_internal@1188: Initiating client connection, host=10.160.27.133:2181,fdbd:dc05:0:19::155:2181,fdbd:dc05:0:33::22:2181,10.160.20.155:2181,fdbd:dc05:0:31::141:2181,10.160.23.141:2181,fdbd:dc05:0:47::133:2181,10.160.24.22:2181,10.160.20.162:2181,fdbd:dc05:0:19::162:2181 sessionTimeout=6000 watcher=0x7f6a65c3af10 sessionId=0 sessionPasswd=<null> context=0x7f6a60dc1140 flags=0
+2024-03-28 11:40:48,900:1625(0x7f6a05f7f700):ZOO_INFO@check_events@2477: initiated connection to server [10.160.23.141:2181]
+2024-03-28 11:40:48,902:1625(0x7f6a05f7f700):ZOO_INFO@check_events@2529: session establishment complete on server [10.160.23.141:2181], sessionId=0x66024b7d124f9851, negotiated timeout=10000 
+2024-03-28 11:41:05,752:1625(0x7f6a61d8c640):ZOO_INFO@zookeeper_close@3335: Closing zookeeper sessionId=0x66024b7d124f9851 to [10.160.23.141:2181]
+
+2024-03-28 11:41:05,755:1625(0x7f6a61d8c640):ZOO_INFO@zookeeper_close@3357: Freeing zookeeper resources for sessionId=0x66024b7d124f9851
+
+2024-04-02 23:18:09,988:1450(0x7f093260a640):ZOO_INFO@log_env@1104: Client environment:zookeeper.version=zookeeper C client 3.5.9
+2024-04-02 23:18:09,988:1450(0x7f093260a640):ZOO_INFO@log_env@1108: Client environment:host.name=mlxlabxkw73sis65c045e7-20240205022023-xcib3h-mj0w4l-worker
+2024-04-02 23:18:09,988:1450(0x7f093260a640):ZOO_INFO@log_env@1115: Client environment:os.name=Linux
+2024-04-02 23:18:09,988:1450(0x7f093260a640):ZOO_INFO@log_env@1116: Client environment:os.arch=5.4.143.bsk.8-amd64
+2024-04-02 23:18:09,988:1450(0x7f093260a640):ZOO_INFO@log_env@1117: Client environment:os.version=#5.4.143.bsk.8 SMP Debian 5.4.143.bsk.8 Wed Jul 20 08:41:57 UTC 
+2024-04-02 23:18:09,988:1450(0x7f093260a640):ZOO_INFO@log_env@1125: Client environment:user.name=(null)
+2024-04-02 23:18:09,989:1450(0x7f093260a640):ZOO_INFO@log_env@1133: Client environment:user.home=/root
+2024-04-02 23:18:09,989:1450(0x7f093260a640):ZOO_INFO@log_env@1145: Client environment:user.dir=/mnt/bn/shuaizzz/hpc/ecom_embedding_for_refusal/code_base/FlagEmbedding
+2024-04-02 23:18:09,989:1450(0x7f093260a640):ZOO_INFO@zookeeper_init_internal@1188: Initiating client connection, host=fdbd:dc05:0:31::141:2181,10.160.27.133:2181,fdbd:dc05:0:19::162:2181,10.160.23.141:2181,fdbd:dc05:0:33::22:2181,10.160.24.22:2181,fdbd:dc05:0:47::133:2181,10.160.20.162:2181,fdbd:dc05:0:19::155:2181,10.160.20.155:2181 sessionTimeout=6000 watcher=0x7f09364b8f10 sessionId=0 sessionPasswd=<null> context=0x7f09315c1140 flags=0
+2024-04-02 23:18:09,992:1450(0x7f08d657f700):ZOO_INFO@check_events@2477: initiated connection to server [10.160.20.162:2181]
+2024-04-02 23:18:09,994:1450(0x7f08d657f700):ZOO_INFO@check_events@2529: session establishment complete on server [10.160.20.162:2181], sessionId=0x640000003e8b7b93, negotiated timeout=10000 
+2024-04-02 23:19:39,805:1450(0x7f093260a640):ZOO_INFO@zookeeper_close@3335: Closing zookeeper sessionId=0x640000003e8b7b93 to [10.160.20.162:2181]
+
+2024-04-02 23:19:39,812:1450(0x7f093260a640):ZOO_INFO@zookeeper_close@3357: Freeing zookeeper resources for sessionId=0x640000003e8b7b93
+
+2024-04-09 20:48:58,408:1448(0x7ff6ab7ad640):ZOO_INFO@log_env@1104: Client environment:zookeeper.version=zookeeper C client 3.5.9
+2024-04-09 20:48:58,408:1448(0x7ff6ab7ad640):ZOO_INFO@log_env@1108: Client environment:host.name=mlxlabxkw73sis65c045e7-20240205022023-xcib3h-kuj7pq-worker
+2024-04-09 20:48:58,408:1448(0x7ff6ab7ad640):ZOO_INFO@log_env@1115: Client environment:os.name=Linux
+2024-04-09 20:48:58,408:1448(0x7ff6ab7ad640):ZOO_INFO@log_env@1116: Client environment:os.arch=5.4.143.bsk.8-amd64
+2024-04-09 20:48:58,408:1448(0x7ff6ab7ad640):ZOO_INFO@log_env@1117: Client environment:os.version=#5.4.143.bsk.8 SMP Debian 5.4.143.bsk.8 Wed Jul 20 08:41:57 UTC 
+2024-04-09 20:48:58,408:1448(0x7ff6ab7ad640):ZOO_INFO@log_env@1125: Client environment:user.name=(null)
+2024-04-09 20:48:58,409:1448(0x7ff6ab7ad640):ZOO_INFO@log_env@1133: Client environment:user.home=/root
+2024-04-09 20:48:58,409:1448(0x7ff6ab7ad640):ZOO_INFO@log_env@1145: Client environment:user.dir=/mnt/bn/shuaizzz/hpc/ecom_embedding_for_refusal/code_base/FlagEmbedding
+2024-04-09 20:48:58,409:1448(0x7ff6ab7ad640):ZOO_INFO@zookeeper_init_internal@1188: Initiating client connection, host=10.160.27.133:2181,10.160.20.155:2181,10.160.20.162:2181,fdbd:dc05:0:47::133:2181,fdbd:dc05:0:19::155:2181,fdbd:dc05:0:19::162:2181,10.160.24.22:2181,fdbd:dc05:0:31::141:2181,10.160.23.141:2181,fdbd:dc05:0:33::22:2181 sessionTimeout=6000 watcher=0x7ff6af660f10 sessionId=0 sessionPasswd=<null> context=0x7ff6aa7c1140 flags=0
+2024-04-09 20:48:58,411:1448(0x7ff64f37f700):ZOO_INFO@check_events@2477: initiated connection to server [fdbd:dc05:0:19::162:2181]
+2024-04-09 20:48:58,443:1448(0x7ff64f37f700):ZOO_INFO@check_events@2529: session establishment complete on server [fdbd:dc05:0:19::162:2181], sessionId=0x640000003e97ce46, negotiated timeout=10000 
+2024-04-09 20:49:06,385:1448(0x7ff6ab7ad640):ZOO_INFO@zookeeper_close@3335: Closing zookeeper sessionId=0x640000003e97ce46 to [fdbd:dc05:0:19::162:2181]
+
+2024-04-09 20:49:06,388:1448(0x7ff6ab7ad640):ZOO_INFO@zookeeper_close@3357: Freeing zookeeper resources for sessionId=0x640000003e97ce46
+
+2024-04-09 21:20:22,856:2192(0x7fc9c54fb640):ZOO_INFO@log_env@1104: Client environment:zookeeper.version=zookeeper C client 3.5.9
+2024-04-09 21:20:22,856:2192(0x7fc9c54fb640):ZOO_INFO@log_env@1108: Client environment:host.name=mlxlabxkw73sis65c045e7-20240205022023-xcib3h-kuj7pq-worker
+2024-04-09 21:20:22,856:2192(0x7fc9c54fb640):ZOO_INFO@log_env@1115: Client environment:os.name=Linux
+2024-04-09 21:20:22,856:2192(0x7fc9c54fb640):ZOO_INFO@log_env@1116: Client environment:os.arch=5.4.143.bsk.8-amd64
+2024-04-09 21:20:22,856:2192(0x7fc9c54fb640):ZOO_INFO@log_env@1117: Client environment:os.version=#5.4.143.bsk.8 SMP Debian 5.4.143.bsk.8 Wed Jul 20 08:41:57 UTC 
+2024-04-09 21:20:22,856:2192(0x7fc9c54fb640):ZOO_INFO@log_env@1125: Client environment:user.name=(null)
+2024-04-09 21:20:22,856:2192(0x7fc9c54fb640):ZOO_INFO@log_env@1133: Client environment:user.home=/root
+2024-04-09 21:20:22,856:2192(0x7fc9c54fb640):ZOO_INFO@log_env@1145: Client environment:user.dir=/mnt/bn/shuaizzz/hpc/ecom_embedding_for_refusal/code_base/FlagEmbedding
+2024-04-09 21:20:22,856:2192(0x7fc9c54fb640):ZOO_INFO@zookeeper_init_internal@1188: Initiating client connection, host=10.160.23.141:2181,fdbd:dc05:0:19::162:2181,fdbd:dc05:0:19::155:2181,fdbd:dc05:0:31::141:2181,10.160.27.133:2181,10.160.20.162:2181,fdbd:dc05:0:47::133:2181,10.160.20.155:2181,10.160.24.22:2181,fdbd:dc05:0:33::22:2181 sessionTimeout=6000 watcher=0x7fc9c93a9f10 sessionId=0 sessionPasswd=<null> context=0x7fc9c45c1140 flags=0
+2024-04-09 21:20:22,859:2192(0x7fc96977f700):ZOO_INFO@check_events@2477: initiated connection to server [fdbd:dc05:0:33::22:2181]
+2024-04-09 21:20:22,861:2192(0x7fc96977f700):ZOO_INFO@check_events@2529: session establishment complete on server [fdbd:dc05:0:33::22:2181], sessionId=0x6702511ffb6b153d, negotiated timeout=10000 
+2024-04-09 21:20:27,941:2192(0x7fc9c54fb640):ZOO_INFO@zookeeper_close@3335: Closing zookeeper sessionId=0x6702511ffb6b153d to [fdbd:dc05:0:33::22:2181]
+
+2024-04-09 21:20:27,943:2192(0x7fc9c54fb640):ZOO_INFO@zookeeper_close@3357: Freeing zookeeper resources for sessionId=0x6702511ffb6b153d
+
+2024-04-09 22:27:43,119:2862(0x7f56be65c640):ZOO_INFO@log_env@1104: Client environment:zookeeper.version=zookeeper C client 3.5.9
+2024-04-09 22:27:43,119:2862(0x7f56be65c640):ZOO_INFO@log_env@1108: Client environment:host.name=mlxlabxkw73sis65c045e7-20240205022023-xcib3h-kuj7pq-worker
+2024-04-09 22:27:43,119:2862(0x7f56be65c640):ZOO_INFO@log_env@1115: Client environment:os.name=Linux
+2024-04-09 22:27:43,119:2862(0x7f56be65c640):ZOO_INFO@log_env@1116: Client environment:os.arch=5.4.143.bsk.8-amd64
+2024-04-09 22:27:43,119:2862(0x7f56be65c640):ZOO_INFO@log_env@1117: Client environment:os.version=#5.4.143.bsk.8 SMP Debian 5.4.143.bsk.8 Wed Jul 20 08:41:57 UTC 
+2024-04-09 22:27:43,119:2862(0x7f56be65c640):ZOO_INFO@log_env@1125: Client environment:user.name=(null)
+2024-04-09 22:27:43,120:2862(0x7f56be65c640):ZOO_INFO@log_env@1133: Client environment:user.home=/root
+2024-04-09 22:27:43,120:2862(0x7f56be65c640):ZOO_INFO@log_env@1145: Client environment:user.dir=/mnt/bn/shuaizzz/hpc/ecom_embedding_for_refusal/code_base/FlagEmbedding
+2024-04-09 22:27:43,120:2862(0x7f56be65c640):ZOO_INFO@zookeeper_init_internal@1188: Initiating client connection, host=fdbd:dc05:0:33::22:2181,fdbd:dc05:0:19::155:2181,fdbd:dc05:0:19::162:2181,fdbd:dc05:0:31::141:2181,10.160.23.141:2181,10.160.27.133:2181,10.160.24.22:2181,fdbd:dc05:0:47::133:2181,10.160.20.155:2181,10.160.20.162:2181 sessionTimeout=6000 watcher=0x7f56c250af10 sessionId=0 sessionPasswd=<null> context=0x7f56bd5c1140 flags=0
+2024-04-09 22:27:43,123:2862(0x7f566277f700):ZOO_INFO@check_events@2477: initiated connection to server [fdbd:dc05:0:19::155:2181]
+2024-04-09 22:27:43,125:2862(0x7f566277f700):ZOO_INFO@check_events@2529: session establishment complete on server [fdbd:dc05:0:19::155:2181], sessionId=0x650250eb84212488, negotiated timeout=10000 
+2024-04-09 22:27:48,244:2862(0x7f56be65c640):ZOO_INFO@zookeeper_close@3335: Closing zookeeper sessionId=0x650250eb84212488 to [fdbd:dc05:0:19::155:2181]
+
+2024-04-09 22:27:48,246:2862(0x7f56be65c640):ZOO_INFO@zookeeper_close@3357: Freeing zookeeper resources for sessionId=0x650250eb84212488
+

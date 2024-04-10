@@ -1,0 +1,950 @@
+2024-02-21 17:52:05,167:666(0x7f234a973640):ZOO_INFO@log_env@1104: Client environment:zookeeper.version=zookeeper C client 3.5.9
+2024-02-21 17:52:05,167:666(0x7f234a973640):ZOO_INFO@log_env@1108: Client environment:host.name=mlxlabxkw73sis65c045e7-20240205022023-xcib3h-7ocnsp-worker
+2024-02-21 17:52:05,167:666(0x7f234a973640):ZOO_INFO@log_env@1115: Client environment:os.name=Linux
+2024-02-21 17:52:05,167:666(0x7f234a973640):ZOO_INFO@log_env@1116: Client environment:os.arch=5.4.143.bsk.8-amd64
+2024-02-21 17:52:05,167:666(0x7f234a973640):ZOO_INFO@log_env@1117: Client environment:os.version=#5.4.143.bsk.8 SMP Debian 5.4.143.bsk.8 Wed Jul 20 08:41:57 UTC 
+2024-02-21 17:52:05,167:666(0x7f234a973640):ZOO_INFO@log_env@1125: Client environment:user.name=(null)
+2024-02-21 17:52:05,168:666(0x7f234a973640):ZOO_INFO@log_env@1133: Client environment:user.home=/root
+2024-02-21 17:52:05,168:666(0x7f234a973640):ZOO_INFO@log_env@1145: Client environment:user.dir=/mnt/bn/shuaizzz/hpc/ecom_embedding_for_refusal/code_base/FlagEmbedding/FlagEmbedding
+2024-02-21 17:52:05,168:666(0x7f234a973640):ZOO_INFO@zookeeper_init_internal@1188: Initiating client connection, host=fdbd:dc05:0:19::162:2181,10.160.20.155:2181,fdbd:dc05:0:47::133:2181,10.160.20.162:2181,10.160.24.22:2181,10.160.23.141:2181,fdbd:dc05:0:19::155:2181,fdbd:dc05:0:31::141:2181,10.160.27.133:2181,fdbd:dc05:0:33::22:2181 sessionTimeout=6000 watcher=0x7f234e821f10 sessionId=0 sessionPasswd=<null> context=0x7f23499c1140 flags=0
+2024-02-21 17:52:05,168:666(0x7f234a973640):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,168:666(0x7f234a973640):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,168:666(0x7f234a973640):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,168:666(0x7f234a973640):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,168:666(0x7f234a973640):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,168:666(0x7f22d1d7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,168:666(0x7f22d1d7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,168:666(0x7f22d1d7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,168:666(0x7f22d1d7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,168:666(0x7f22d1d7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,170:666(0x7f22d1d7f700):ZOO_INFO@check_events@2477: initiated connection to server [fdbd:dc05:0:31::141:2181]
+2024-02-21 17:52:05,170:666(0x7f22d1d7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,170:666(0x7f22d1d7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,170:666(0x7f22d1d7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,170:666(0x7f22d1d7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,170:666(0x7f22d1d7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,173:666(0x7f22d1d7f700):ZOO_INFO@check_events@2529: session establishment complete on server [fdbd:dc05:0:31::141:2181], sessionId=0x66024b7d11e7ece5, negotiated timeout=10000 
+2024-02-21 17:52:05,173:666(0x7f22d1d7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,173:666(0x7f22d1d7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,173:666(0x7f22d1d7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,173:666(0x7f22d1d7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,173:666(0x7f22d1d7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,173:666(0x7f22d1d7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,173:666(0x7f22d1d7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,173:666(0x7f22d1d7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,173:666(0x7f22d1d7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,173:666(0x7f22d1d7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,173:666(0x7f22d1d7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,173:666(0x7f22d1d7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,173:666(0x7f22d1d7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,173:666(0x7f22d1d7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,173:666(0x7f22d1d7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,175:666(0x7f22d1d7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,175:666(0x7f22d1d7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,175:666(0x7f22d1d7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,175:666(0x7f22d1d7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,175:666(0x7f22d1d7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:05,237:666(0x7f234a973640):ZOO_INFO@zookeeper_close@3335: Closing zookeeper sessionId=0x66024b7d11e7ece5 to [fdbd:dc05:0:31::141:2181]
+
+2024-02-21 17:52:05,241:666(0x7f234a973640):ZOO_INFO@zookeeper_close@3357: Freeing zookeeper resources for sessionId=0x66024b7d11e7ece5
+
+2024-02-21 17:52:10,504:816(0x7f64140b6640):ZOO_INFO@log_env@1104: Client environment:zookeeper.version=zookeeper C client 3.5.9
+2024-02-21 17:52:10,504:816(0x7f64140b6640):ZOO_INFO@log_env@1108: Client environment:host.name=mlxlabxkw73sis65c045e7-20240205022023-xcib3h-7ocnsp-worker
+2024-02-21 17:52:10,504:816(0x7f64140b6640):ZOO_INFO@log_env@1115: Client environment:os.name=Linux
+2024-02-21 17:52:10,504:816(0x7f64140b6640):ZOO_INFO@log_env@1116: Client environment:os.arch=5.4.143.bsk.8-amd64
+2024-02-21 17:52:10,504:816(0x7f64140b6640):ZOO_INFO@log_env@1117: Client environment:os.version=#5.4.143.bsk.8 SMP Debian 5.4.143.bsk.8 Wed Jul 20 08:41:57 UTC 
+2024-02-21 17:52:10,504:816(0x7f64140b6640):ZOO_INFO@log_env@1125: Client environment:user.name=(null)
+2024-02-21 17:52:10,505:816(0x7f64140b6640):ZOO_INFO@log_env@1133: Client environment:user.home=/root
+2024-02-21 17:52:10,505:816(0x7f64140b6640):ZOO_INFO@log_env@1145: Client environment:user.dir=/mnt/bn/shuaizzz/hpc/ecom_embedding_for_refusal/code_base/FlagEmbedding/FlagEmbedding
+2024-02-21 17:52:10,505:816(0x7f64140b6640):ZOO_INFO@zookeeper_init_internal@1188: Initiating client connection, host=fdbd:dc05:0:47::133:2181,10.160.24.22:2181,10.160.23.141:2181,fdbd:dc05:0:31::141:2181,fdbd:dc05:0:19::155:2181,10.160.20.162:2181,fdbd:dc05:0:33::22:2181,10.160.27.133:2181,10.160.20.155:2181,fdbd:dc05:0:19::162:2181 sessionTimeout=6000 watcher=0x7f6417f64f10 sessionId=0 sessionPasswd=<null> context=0x7f64131c1140 flags=0
+2024-02-21 17:52:10,505:816(0x7f64140b6640):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,505:816(0x7f64140b6640):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,505:816(0x7f64140b6640):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,505:816(0x7f64140b6640):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,505:816(0x7f64140b6640):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,505:816(0x7f639bb7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,505:816(0x7f639bb7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,505:816(0x7f639bb7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,505:816(0x7f639bb7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,505:816(0x7f639bb7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,507:816(0x7f639bb7f700):ZOO_INFO@check_events@2477: initiated connection to server [fdbd:dc05:0:31::141:2181]
+2024-02-21 17:52:10,507:816(0x7f639bb7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,507:816(0x7f639bb7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,507:816(0x7f639bb7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,507:816(0x7f639bb7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,507:816(0x7f639bb7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,510:816(0x7f639bb7f700):ZOO_INFO@check_events@2529: session establishment complete on server [fdbd:dc05:0:31::141:2181], sessionId=0x66024b7d11e7eceb, negotiated timeout=10000 
+2024-02-21 17:52:10,510:816(0x7f639bb7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,510:816(0x7f639bb7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,510:816(0x7f639bb7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,510:816(0x7f639bb7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,510:816(0x7f639bb7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,510:816(0x7f639bb7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,510:816(0x7f639bb7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,510:816(0x7f639bb7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,510:816(0x7f639bb7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,510:816(0x7f639bb7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,510:816(0x7f639bb7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,510:816(0x7f639bb7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,510:816(0x7f639bb7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,510:816(0x7f639bb7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,510:816(0x7f639bb7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,512:816(0x7f639bb7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,512:816(0x7f639bb7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,512:816(0x7f639bb7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,512:816(0x7f639bb7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,512:816(0x7f639bb7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:10,559:816(0x7f64140b6640):ZOO_INFO@zookeeper_close@3335: Closing zookeeper sessionId=0x66024b7d11e7eceb to [fdbd:dc05:0:31::141:2181]
+
+2024-02-21 17:52:10,562:816(0x7f64140b6640):ZOO_INFO@zookeeper_close@3357: Freeing zookeeper resources for sessionId=0x66024b7d11e7eceb
+
+2024-02-21 17:52:26,934:966(0x7f4f5f571640):ZOO_INFO@log_env@1104: Client environment:zookeeper.version=zookeeper C client 3.5.9
+2024-02-21 17:52:26,934:966(0x7f4f5f571640):ZOO_INFO@log_env@1108: Client environment:host.name=mlxlabxkw73sis65c045e7-20240205022023-xcib3h-7ocnsp-worker
+2024-02-21 17:52:26,934:966(0x7f4f5f571640):ZOO_INFO@log_env@1115: Client environment:os.name=Linux
+2024-02-21 17:52:26,934:966(0x7f4f5f571640):ZOO_INFO@log_env@1116: Client environment:os.arch=5.4.143.bsk.8-amd64
+2024-02-21 17:52:26,934:966(0x7f4f5f571640):ZOO_INFO@log_env@1117: Client environment:os.version=#5.4.143.bsk.8 SMP Debian 5.4.143.bsk.8 Wed Jul 20 08:41:57 UTC 
+2024-02-21 17:52:26,934:966(0x7f4f5f571640):ZOO_INFO@log_env@1125: Client environment:user.name=(null)
+2024-02-21 17:52:26,935:966(0x7f4f5f571640):ZOO_INFO@log_env@1133: Client environment:user.home=/root
+2024-02-21 17:52:26,935:966(0x7f4f5f571640):ZOO_INFO@log_env@1145: Client environment:user.dir=/mnt/bn/shuaizzz/hpc/ecom_embedding_for_refusal/code_base/FlagEmbedding/FlagEmbedding
+2024-02-21 17:52:26,935:966(0x7f4f5f571640):ZOO_INFO@zookeeper_init_internal@1188: Initiating client connection, host=10.160.24.22:2181,10.160.20.155:2181,fdbd:dc05:0:19::162:2181,10.160.20.162:2181,fdbd:dc05:0:19::155:2181,10.160.27.133:2181,fdbd:dc05:0:33::22:2181,10.160.23.141:2181,fdbd:dc05:0:47::133:2181,fdbd:dc05:0:31::141:2181 sessionTimeout=6000 watcher=0x7f4f6341ff10 sessionId=0 sessionPasswd=<null> context=0x7f4f5e5c1140 flags=0
+2024-02-21 17:52:26,935:966(0x7f4f5f571640):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,935:966(0x7f4f5f571640):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,935:966(0x7f4f5f571640):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,935:966(0x7f4f5f571640):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,935:966(0x7f4f5f571640):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,935:966(0x7f4ee737f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,935:966(0x7f4ee737f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,935:966(0x7f4ee737f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,935:966(0x7f4ee737f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,935:966(0x7f4ee737f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,937:966(0x7f4ee737f700):ZOO_INFO@check_events@2477: initiated connection to server [fdbd:dc05:0:33::22:2181]
+2024-02-21 17:52:26,937:966(0x7f4ee737f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,937:966(0x7f4ee737f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,937:966(0x7f4ee737f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,937:966(0x7f4ee737f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,937:966(0x7f4ee737f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,940:966(0x7f4ee737f700):ZOO_INFO@check_events@2529: session establishment complete on server [fdbd:dc05:0:33::22:2181], sessionId=0x6702511ffae70c0a, negotiated timeout=10000 
+2024-02-21 17:52:26,940:966(0x7f4ee737f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,940:966(0x7f4ee737f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,940:966(0x7f4ee737f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,940:966(0x7f4ee737f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,940:966(0x7f4ee737f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,940:966(0x7f4ee737f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,940:966(0x7f4ee737f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,940:966(0x7f4ee737f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,940:966(0x7f4ee737f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,940:966(0x7f4ee737f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,940:966(0x7f4ee737f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,940:966(0x7f4ee737f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,940:966(0x7f4ee737f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,940:966(0x7f4ee737f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,940:966(0x7f4ee737f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,942:966(0x7f4ee737f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,942:966(0x7f4ee737f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,942:966(0x7f4ee737f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,942:966(0x7f4ee737f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,942:966(0x7f4ee737f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:26,990:966(0x7f4f5f571640):ZOO_INFO@zookeeper_close@3335: Closing zookeeper sessionId=0x6702511ffae70c0a to [fdbd:dc05:0:33::22:2181]
+
+2024-02-21 17:52:26,993:966(0x7f4f5f571640):ZOO_INFO@zookeeper_close@3357: Freeing zookeeper resources for sessionId=0x6702511ffae70c0a
+
+2024-02-21 17:52:33,179:1116(0x7fe0190c1640):ZOO_INFO@log_env@1104: Client environment:zookeeper.version=zookeeper C client 3.5.9
+2024-02-21 17:52:33,179:1116(0x7fe0190c1640):ZOO_INFO@log_env@1108: Client environment:host.name=mlxlabxkw73sis65c045e7-20240205022023-xcib3h-7ocnsp-worker
+2024-02-21 17:52:33,179:1116(0x7fe0190c1640):ZOO_INFO@log_env@1115: Client environment:os.name=Linux
+2024-02-21 17:52:33,179:1116(0x7fe0190c1640):ZOO_INFO@log_env@1116: Client environment:os.arch=5.4.143.bsk.8-amd64
+2024-02-21 17:52:33,179:1116(0x7fe0190c1640):ZOO_INFO@log_env@1117: Client environment:os.version=#5.4.143.bsk.8 SMP Debian 5.4.143.bsk.8 Wed Jul 20 08:41:57 UTC 
+2024-02-21 17:52:33,179:1116(0x7fe0190c1640):ZOO_INFO@log_env@1125: Client environment:user.name=(null)
+2024-02-21 17:52:33,180:1116(0x7fe0190c1640):ZOO_INFO@log_env@1133: Client environment:user.home=/root
+2024-02-21 17:52:33,180:1116(0x7fe0190c1640):ZOO_INFO@log_env@1145: Client environment:user.dir=/mnt/bn/shuaizzz/hpc/ecom_embedding_for_refusal/code_base/FlagEmbedding/FlagEmbedding
+2024-02-21 17:52:33,180:1116(0x7fe0190c1640):ZOO_INFO@zookeeper_init_internal@1188: Initiating client connection, host=10.160.27.133:2181,fdbd:dc05:0:19::155:2181,fdbd:dc05:0:19::162:2181,fdbd:dc05:0:33::22:2181,10.160.23.141:2181,10.160.20.162:2181,10.160.20.155:2181,fdbd:dc05:0:47::133:2181,fdbd:dc05:0:31::141:2181,10.160.24.22:2181 sessionTimeout=6000 watcher=0x7fe01cf6ff10 sessionId=0 sessionPasswd=<null> context=0x7fe0181c1200 flags=0
+2024-02-21 17:52:33,180:1116(0x7fe0190c1640):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,180:1116(0x7fe0190c1640):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,180:1116(0x7fe0190c1640):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,180:1116(0x7fe0190c1640):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,180:1116(0x7fe0190c1640):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,180:1116(0x7fdfa0b7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,180:1116(0x7fdfa0b7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,180:1116(0x7fdfa0b7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,180:1116(0x7fdfa0b7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,180:1116(0x7fdfa0b7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,182:1116(0x7fdfa0b7f700):ZOO_INFO@check_events@2477: initiated connection to server [fdbd:dc05:0:19::162:2181]
+2024-02-21 17:52:33,182:1116(0x7fdfa0b7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,182:1116(0x7fdfa0b7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,182:1116(0x7fdfa0b7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,182:1116(0x7fdfa0b7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,182:1116(0x7fdfa0b7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,185:1116(0x7fdfa0b7f700):ZOO_INFO@check_events@2529: session establishment complete on server [fdbd:dc05:0:19::162:2181], sessionId=0x640000003e13c194, negotiated timeout=10000 
+2024-02-21 17:52:33,185:1116(0x7fdfa0b7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,185:1116(0x7fdfa0b7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,185:1116(0x7fdfa0b7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,185:1116(0x7fdfa0b7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,185:1116(0x7fdfa0b7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,185:1116(0x7fdfa0b7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,185:1116(0x7fdfa0b7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,185:1116(0x7fdfa0b7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,185:1116(0x7fdfa0b7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,185:1116(0x7fdfa0b7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,185:1116(0x7fdfa0b7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,185:1116(0x7fdfa0b7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,185:1116(0x7fdfa0b7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,185:1116(0x7fdfa0b7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,185:1116(0x7fdfa0b7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,187:1116(0x7fdfa0b7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,187:1116(0x7fdfa0b7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,187:1116(0x7fdfa0b7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,187:1116(0x7fdfa0b7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,187:1116(0x7fdfa0b7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 17:52:33,236:1116(0x7fe0190c1640):ZOO_INFO@zookeeper_close@3335: Closing zookeeper sessionId=0x640000003e13c194 to [fdbd:dc05:0:19::162:2181]
+
+2024-02-21 17:52:33,238:1116(0x7fe0190c1640):ZOO_INFO@zookeeper_close@3357: Freeing zookeeper resources for sessionId=0x640000003e13c194
+
+2024-02-21 18:01:35,804:1276(0x7f741eab4640):ZOO_INFO@log_env@1104: Client environment:zookeeper.version=zookeeper C client 3.5.9
+2024-02-21 18:01:35,804:1276(0x7f741eab4640):ZOO_INFO@log_env@1108: Client environment:host.name=mlxlabxkw73sis65c045e7-20240205022023-xcib3h-7ocnsp-worker
+2024-02-21 18:01:35,804:1276(0x7f741eab4640):ZOO_INFO@log_env@1115: Client environment:os.name=Linux
+2024-02-21 18:01:35,804:1276(0x7f741eab4640):ZOO_INFO@log_env@1116: Client environment:os.arch=5.4.143.bsk.8-amd64
+2024-02-21 18:01:35,804:1276(0x7f741eab4640):ZOO_INFO@log_env@1117: Client environment:os.version=#5.4.143.bsk.8 SMP Debian 5.4.143.bsk.8 Wed Jul 20 08:41:57 UTC 
+2024-02-21 18:01:35,804:1276(0x7f741eab4640):ZOO_INFO@log_env@1125: Client environment:user.name=(null)
+2024-02-21 18:01:35,805:1276(0x7f741eab4640):ZOO_INFO@log_env@1133: Client environment:user.home=/root
+2024-02-21 18:01:35,805:1276(0x7f741eab4640):ZOO_INFO@log_env@1145: Client environment:user.dir=/mnt/bn/shuaizzz/hpc/ecom_embedding_for_refusal/code_base/FlagEmbedding/FlagEmbedding
+2024-02-21 18:01:35,805:1276(0x7f741eab4640):ZOO_INFO@zookeeper_init_internal@1188: Initiating client connection, host=fdbd:dc05:0:33::22:2181,fdbd:dc05:0:19::162:2181,10.160.20.162:2181,fdbd:dc05:0:31::141:2181,fdbd:dc05:0:47::133:2181,fdbd:dc05:0:19::155:2181,10.160.27.133:2181,10.160.23.141:2181,10.160.24.22:2181,10.160.20.155:2181 sessionTimeout=6000 watcher=0x7f7422962f10 sessionId=0 sessionPasswd=<null> context=0x7f741dbc1140 flags=0
+2024-02-21 18:01:35,805:1276(0x7f741eab4640):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,805:1276(0x7f741eab4640):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,805:1276(0x7f741eab4640):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,805:1276(0x7f741eab4640):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,805:1276(0x7f741eab4640):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,806:1276(0x7f73a5f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,806:1276(0x7f73a5f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,806:1276(0x7f73a5f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,806:1276(0x7f73a5f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,806:1276(0x7f73a5f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,808:1276(0x7f73a5f7f700):ZOO_INFO@check_events@2477: initiated connection to server [fdbd:dc05:0:31::141:2181]
+2024-02-21 18:01:35,808:1276(0x7f73a5f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,808:1276(0x7f73a5f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,808:1276(0x7f73a5f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,808:1276(0x7f73a5f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,808:1276(0x7f73a5f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,810:1276(0x7f73a5f7f700):ZOO_INFO@check_events@2529: session establishment complete on server [fdbd:dc05:0:31::141:2181], sessionId=0x66024b7d11e7ef43, negotiated timeout=10000 
+2024-02-21 18:01:35,810:1276(0x7f73a5f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,810:1276(0x7f73a5f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,810:1276(0x7f73a5f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,810:1276(0x7f73a5f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,810:1276(0x7f73a5f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,811:1276(0x7f73a5f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,811:1276(0x7f73a5f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,811:1276(0x7f73a5f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,811:1276(0x7f73a5f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,811:1276(0x7f73a5f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,811:1276(0x7f73a5f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,811:1276(0x7f73a5f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,811:1276(0x7f73a5f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,811:1276(0x7f73a5f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,811:1276(0x7f73a5f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,813:1276(0x7f73a5f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,813:1276(0x7f73a5f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,813:1276(0x7f73a5f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,813:1276(0x7f73a5f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,813:1276(0x7f73a5f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:01:35,871:1276(0x7f741eab4640):ZOO_INFO@zookeeper_close@3335: Closing zookeeper sessionId=0x66024b7d11e7ef43 to [fdbd:dc05:0:31::141:2181]
+
+2024-02-21 18:01:35,874:1276(0x7f741eab4640):ZOO_INFO@zookeeper_close@3357: Freeing zookeeper resources for sessionId=0x66024b7d11e7ef43
+
+2024-02-21 18:07:55,102:1426(0x7f8922fda640):ZOO_INFO@log_env@1104: Client environment:zookeeper.version=zookeeper C client 3.5.9
+2024-02-21 18:07:55,102:1426(0x7f8922fda640):ZOO_INFO@log_env@1108: Client environment:host.name=mlxlabxkw73sis65c045e7-20240205022023-xcib3h-7ocnsp-worker
+2024-02-21 18:07:55,102:1426(0x7f8922fda640):ZOO_INFO@log_env@1115: Client environment:os.name=Linux
+2024-02-21 18:07:55,102:1426(0x7f8922fda640):ZOO_INFO@log_env@1116: Client environment:os.arch=5.4.143.bsk.8-amd64
+2024-02-21 18:07:55,102:1426(0x7f8922fda640):ZOO_INFO@log_env@1117: Client environment:os.version=#5.4.143.bsk.8 SMP Debian 5.4.143.bsk.8 Wed Jul 20 08:41:57 UTC 
+2024-02-21 18:07:55,102:1426(0x7f8922fda640):ZOO_INFO@log_env@1125: Client environment:user.name=(null)
+2024-02-21 18:07:55,102:1426(0x7f8922fda640):ZOO_INFO@log_env@1133: Client environment:user.home=/root
+2024-02-21 18:07:55,102:1426(0x7f8922fda640):ZOO_INFO@log_env@1145: Client environment:user.dir=/mnt/bn/shuaizzz/hpc/ecom_embedding_for_refusal/code_base/FlagEmbedding/FlagEmbedding
+2024-02-21 18:07:55,102:1426(0x7f8922fda640):ZOO_INFO@zookeeper_init_internal@1188: Initiating client connection, host=fdbd:dc05:0:19::162:2181,10.160.23.141:2181,10.160.20.155:2181,fdbd:dc05:0:47::133:2181,fdbd:dc05:0:19::155:2181,fdbd:dc05:0:31::141:2181,10.160.24.22:2181,10.160.27.133:2181,10.160.20.162:2181,fdbd:dc05:0:33::22:2181 sessionTimeout=6000 watcher=0x7f8926e8df10 sessionId=0 sessionPasswd=<null> context=0x7f8921fc1140 flags=0
+2024-02-21 18:07:55,102:1426(0x7f8922fda640):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,102:1426(0x7f8922fda640):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,102:1426(0x7f8922fda640):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,102:1426(0x7f8922fda640):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,102:1426(0x7f8922fda640):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,103:1426(0x7f88aa77f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,103:1426(0x7f88aa77f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,103:1426(0x7f88aa77f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,103:1426(0x7f88aa77f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,103:1426(0x7f88aa77f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,105:1426(0x7f88aa77f700):ZOO_INFO@check_events@2477: initiated connection to server [fdbd:dc05:0:33::22:2181]
+2024-02-21 18:07:55,105:1426(0x7f88aa77f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,105:1426(0x7f88aa77f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,105:1426(0x7f88aa77f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,105:1426(0x7f88aa77f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,105:1426(0x7f88aa77f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,107:1426(0x7f88aa77f700):ZOO_INFO@check_events@2529: session establishment complete on server [fdbd:dc05:0:33::22:2181], sessionId=0x6702511ffae71062, negotiated timeout=10000 
+2024-02-21 18:07:55,107:1426(0x7f88aa77f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,107:1426(0x7f88aa77f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,107:1426(0x7f88aa77f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,107:1426(0x7f88aa77f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,107:1426(0x7f88aa77f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,108:1426(0x7f88aa77f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,108:1426(0x7f88aa77f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,108:1426(0x7f88aa77f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,108:1426(0x7f88aa77f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,108:1426(0x7f88aa77f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,108:1426(0x7f88aa77f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,108:1426(0x7f88aa77f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,108:1426(0x7f88aa77f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,108:1426(0x7f88aa77f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,108:1426(0x7f88aa77f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,110:1426(0x7f88aa77f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,110:1426(0x7f88aa77f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,110:1426(0x7f88aa77f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,110:1426(0x7f88aa77f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,110:1426(0x7f88aa77f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:55,157:1426(0x7f8922fda640):ZOO_INFO@zookeeper_close@3335: Closing zookeeper sessionId=0x6702511ffae71062 to [fdbd:dc05:0:33::22:2181]
+
+2024-02-21 18:07:55,159:1426(0x7f8922fda640):ZOO_INFO@zookeeper_close@3357: Freeing zookeeper resources for sessionId=0x6702511ffae71062
+
+2024-02-21 18:07:59,626:1576(0x7fea4baa4640):ZOO_INFO@log_env@1104: Client environment:zookeeper.version=zookeeper C client 3.5.9
+2024-02-21 18:07:59,626:1576(0x7fea4baa4640):ZOO_INFO@log_env@1108: Client environment:host.name=mlxlabxkw73sis65c045e7-20240205022023-xcib3h-7ocnsp-worker
+2024-02-21 18:07:59,626:1576(0x7fea4baa4640):ZOO_INFO@log_env@1115: Client environment:os.name=Linux
+2024-02-21 18:07:59,626:1576(0x7fea4baa4640):ZOO_INFO@log_env@1116: Client environment:os.arch=5.4.143.bsk.8-amd64
+2024-02-21 18:07:59,626:1576(0x7fea4baa4640):ZOO_INFO@log_env@1117: Client environment:os.version=#5.4.143.bsk.8 SMP Debian 5.4.143.bsk.8 Wed Jul 20 08:41:57 UTC 
+2024-02-21 18:07:59,626:1576(0x7fea4baa4640):ZOO_INFO@log_env@1125: Client environment:user.name=(null)
+2024-02-21 18:07:59,626:1576(0x7fea4baa4640):ZOO_INFO@log_env@1133: Client environment:user.home=/root
+2024-02-21 18:07:59,626:1576(0x7fea4baa4640):ZOO_INFO@log_env@1145: Client environment:user.dir=/mnt/bn/shuaizzz/hpc/ecom_embedding_for_refusal/code_base/FlagEmbedding/FlagEmbedding
+2024-02-21 18:07:59,626:1576(0x7fea4baa4640):ZOO_INFO@zookeeper_init_internal@1188: Initiating client connection, host=fdbd:dc05:0:47::133:2181,fdbd:dc05:0:33::22:2181,fdbd:dc05:0:31::141:2181,10.160.24.22:2181,fdbd:dc05:0:19::155:2181,10.160.23.141:2181,10.160.20.155:2181,10.160.20.162:2181,10.160.27.133:2181,fdbd:dc05:0:19::162:2181 sessionTimeout=6000 watcher=0x7fea4f952f10 sessionId=0 sessionPasswd=<null> context=0x7fea4abc1200 flags=0
+2024-02-21 18:07:59,626:1576(0x7fea4baa4640):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,626:1576(0x7fea4baa4640):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,626:1576(0x7fea4baa4640):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,626:1576(0x7fea4baa4640):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,626:1576(0x7fea4baa4640):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,627:1576(0x7fe9d317f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,627:1576(0x7fe9d317f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,627:1576(0x7fe9d317f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,627:1576(0x7fe9d317f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,627:1576(0x7fe9d317f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,629:1576(0x7fe9d317f700):ZOO_INFO@check_events@2477: initiated connection to server [fdbd:dc05:0:33::22:2181]
+2024-02-21 18:07:59,629:1576(0x7fe9d317f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,629:1576(0x7fe9d317f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,629:1576(0x7fe9d317f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,629:1576(0x7fe9d317f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,629:1576(0x7fe9d317f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,631:1576(0x7fe9d317f700):ZOO_INFO@check_events@2529: session establishment complete on server [fdbd:dc05:0:33::22:2181], sessionId=0x6702511ffae71067, negotiated timeout=10000 
+2024-02-21 18:07:59,631:1576(0x7fe9d317f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,631:1576(0x7fe9d317f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,631:1576(0x7fe9d317f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,631:1576(0x7fe9d317f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,631:1576(0x7fe9d317f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,632:1576(0x7fe9d317f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,632:1576(0x7fe9d317f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,632:1576(0x7fe9d317f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,632:1576(0x7fe9d317f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,632:1576(0x7fe9d317f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,632:1576(0x7fe9d317f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,632:1576(0x7fe9d317f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,632:1576(0x7fe9d317f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,632:1576(0x7fe9d317f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,632:1576(0x7fe9d317f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,634:1576(0x7fe9d317f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,634:1576(0x7fe9d317f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,634:1576(0x7fe9d317f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,634:1576(0x7fe9d317f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,634:1576(0x7fe9d317f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:07:59,682:1576(0x7fea4baa4640):ZOO_INFO@zookeeper_close@3335: Closing zookeeper sessionId=0x6702511ffae71067 to [fdbd:dc05:0:33::22:2181]
+
+2024-02-21 18:07:59,684:1576(0x7fea4baa4640):ZOO_INFO@zookeeper_close@3357: Freeing zookeeper resources for sessionId=0x6702511ffae71067
+
+2024-02-21 18:11:22,619:1726(0x7facd501c640):ZOO_INFO@log_env@1104: Client environment:zookeeper.version=zookeeper C client 3.5.9
+2024-02-21 18:11:22,619:1726(0x7facd501c640):ZOO_INFO@log_env@1108: Client environment:host.name=mlxlabxkw73sis65c045e7-20240205022023-xcib3h-7ocnsp-worker
+2024-02-21 18:11:22,619:1726(0x7facd501c640):ZOO_INFO@log_env@1115: Client environment:os.name=Linux
+2024-02-21 18:11:22,619:1726(0x7facd501c640):ZOO_INFO@log_env@1116: Client environment:os.arch=5.4.143.bsk.8-amd64
+2024-02-21 18:11:22,619:1726(0x7facd501c640):ZOO_INFO@log_env@1117: Client environment:os.version=#5.4.143.bsk.8 SMP Debian 5.4.143.bsk.8 Wed Jul 20 08:41:57 UTC 
+2024-02-21 18:11:22,619:1726(0x7facd501c640):ZOO_INFO@log_env@1125: Client environment:user.name=(null)
+2024-02-21 18:11:22,620:1726(0x7facd501c640):ZOO_INFO@log_env@1133: Client environment:user.home=/root
+2024-02-21 18:11:22,620:1726(0x7facd501c640):ZOO_INFO@log_env@1145: Client environment:user.dir=/mnt/bn/shuaizzz/hpc/ecom_embedding_for_refusal/code_base/FlagEmbedding/FlagEmbedding
+2024-02-21 18:11:22,620:1726(0x7facd501c640):ZOO_INFO@zookeeper_init_internal@1188: Initiating client connection, host=fdbd:dc05:0:19::162:2181,fdbd:dc05:0:33::22:2181,10.160.23.141:2181,10.160.20.155:2181,fdbd:dc05:0:19::155:2181,10.160.20.162:2181,10.160.27.133:2181,10.160.24.22:2181,fdbd:dc05:0:31::141:2181,fdbd:dc05:0:47::133:2181 sessionTimeout=6000 watcher=0x7facd8ecaf10 sessionId=0 sessionPasswd=<null> context=0x7facd3fc1200 flags=0
+2024-02-21 18:11:22,620:1726(0x7facd501c640):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,620:1726(0x7facd501c640):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,620:1726(0x7facd501c640):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,620:1726(0x7facd501c640):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,620:1726(0x7facd501c640):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,621:1726(0x7fac5c77f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,621:1726(0x7fac5c77f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,621:1726(0x7fac5c77f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,621:1726(0x7fac5c77f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,621:1726(0x7fac5c77f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,623:1726(0x7fac5c77f700):ZOO_INFO@check_events@2477: initiated connection to server [fdbd:dc05:0:19::162:2181]
+2024-02-21 18:11:22,623:1726(0x7fac5c77f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,623:1726(0x7fac5c77f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,623:1726(0x7fac5c77f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,623:1726(0x7fac5c77f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,623:1726(0x7fac5c77f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,625:1726(0x7fac5c77f700):ZOO_INFO@check_events@2529: session establishment complete on server [fdbd:dc05:0:19::162:2181], sessionId=0x640000003e13c6ea, negotiated timeout=10000 
+2024-02-21 18:11:22,625:1726(0x7fac5c77f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,625:1726(0x7fac5c77f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,625:1726(0x7fac5c77f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,625:1726(0x7fac5c77f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,625:1726(0x7fac5c77f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,626:1726(0x7fac5c77f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,626:1726(0x7fac5c77f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,626:1726(0x7fac5c77f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,626:1726(0x7fac5c77f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,626:1726(0x7fac5c77f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,626:1726(0x7fac5c77f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,626:1726(0x7fac5c77f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,626:1726(0x7fac5c77f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,626:1726(0x7fac5c77f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,626:1726(0x7fac5c77f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,628:1726(0x7fac5c77f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,628:1726(0x7fac5c77f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,628:1726(0x7fac5c77f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,628:1726(0x7fac5c77f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,628:1726(0x7fac5c77f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:22,676:1726(0x7facd501c640):ZOO_INFO@zookeeper_close@3335: Closing zookeeper sessionId=0x640000003e13c6ea to [fdbd:dc05:0:19::162:2181]
+
+2024-02-21 18:11:22,678:1726(0x7facd501c640):ZOO_INFO@zookeeper_close@3357: Freeing zookeeper resources for sessionId=0x640000003e13c6ea
+
+2024-02-21 18:11:29,242:1876(0x7fe9426b3640):ZOO_INFO@log_env@1104: Client environment:zookeeper.version=zookeeper C client 3.5.9
+2024-02-21 18:11:29,242:1876(0x7fe9426b3640):ZOO_INFO@log_env@1108: Client environment:host.name=mlxlabxkw73sis65c045e7-20240205022023-xcib3h-7ocnsp-worker
+2024-02-21 18:11:29,242:1876(0x7fe9426b3640):ZOO_INFO@log_env@1115: Client environment:os.name=Linux
+2024-02-21 18:11:29,242:1876(0x7fe9426b3640):ZOO_INFO@log_env@1116: Client environment:os.arch=5.4.143.bsk.8-amd64
+2024-02-21 18:11:29,242:1876(0x7fe9426b3640):ZOO_INFO@log_env@1117: Client environment:os.version=#5.4.143.bsk.8 SMP Debian 5.4.143.bsk.8 Wed Jul 20 08:41:57 UTC 
+2024-02-21 18:11:29,242:1876(0x7fe9426b3640):ZOO_INFO@log_env@1125: Client environment:user.name=(null)
+2024-02-21 18:11:29,243:1876(0x7fe9426b3640):ZOO_INFO@log_env@1133: Client environment:user.home=/root
+2024-02-21 18:11:29,243:1876(0x7fe9426b3640):ZOO_INFO@log_env@1145: Client environment:user.dir=/mnt/bn/shuaizzz/hpc/ecom_embedding_for_refusal/code_base/FlagEmbedding/FlagEmbedding
+2024-02-21 18:11:29,243:1876(0x7fe9426b3640):ZOO_INFO@zookeeper_init_internal@1188: Initiating client connection, host=10.160.23.141:2181,fdbd:dc05:0:47::133:2181,fdbd:dc05:0:31::141:2181,10.160.24.22:2181,fdbd:dc05:0:19::155:2181,10.160.20.155:2181,fdbd:dc05:0:33::22:2181,10.160.20.162:2181,10.160.27.133:2181,fdbd:dc05:0:19::162:2181 sessionTimeout=6000 watcher=0x7fe946561f10 sessionId=0 sessionPasswd=<null> context=0x7fe9417c1140 flags=0
+2024-02-21 18:11:29,243:1876(0x7fe9426b3640):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,243:1876(0x7fe9426b3640):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,243:1876(0x7fe9426b3640):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,243:1876(0x7fe9426b3640):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,243:1876(0x7fe9426b3640):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,243:1876(0x7fe8ca37f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,243:1876(0x7fe8ca37f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,243:1876(0x7fe8ca37f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,243:1876(0x7fe8ca37f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,243:1876(0x7fe8ca37f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,245:1876(0x7fe8ca37f700):ZOO_INFO@check_events@2477: initiated connection to server [fdbd:dc05:0:33::22:2181]
+2024-02-21 18:11:29,245:1876(0x7fe8ca37f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,245:1876(0x7fe8ca37f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,245:1876(0x7fe8ca37f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,245:1876(0x7fe8ca37f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,245:1876(0x7fe8ca37f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,248:1876(0x7fe8ca37f700):ZOO_INFO@check_events@2529: session establishment complete on server [fdbd:dc05:0:33::22:2181], sessionId=0x6702511ffae71161, negotiated timeout=10000 
+2024-02-21 18:11:29,248:1876(0x7fe8ca37f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,248:1876(0x7fe8ca37f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,248:1876(0x7fe8ca37f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,248:1876(0x7fe8ca37f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,248:1876(0x7fe8ca37f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,248:1876(0x7fe8ca37f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,248:1876(0x7fe8ca37f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,248:1876(0x7fe8ca37f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,248:1876(0x7fe8ca37f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,248:1876(0x7fe8ca37f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,248:1876(0x7fe8ca37f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,248:1876(0x7fe8ca37f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,248:1876(0x7fe8ca37f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,248:1876(0x7fe8ca37f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,248:1876(0x7fe8ca37f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,250:1876(0x7fe8ca37f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,250:1876(0x7fe8ca37f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,251:1876(0x7fe8ca37f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,251:1876(0x7fe8ca37f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,251:1876(0x7fe8ca37f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:11:29,308:1876(0x7fe9426b3640):ZOO_INFO@zookeeper_close@3335: Closing zookeeper sessionId=0x6702511ffae71161 to [fdbd:dc05:0:33::22:2181]
+
+2024-02-21 18:11:29,310:1876(0x7fe9426b3640):ZOO_INFO@zookeeper_close@3357: Freeing zookeeper resources for sessionId=0x6702511ffae71161
+
+2024-02-21 18:19:41,055:2026(0x7f2d01477640):ZOO_INFO@log_env@1104: Client environment:zookeeper.version=zookeeper C client 3.5.9
+2024-02-21 18:19:41,055:2026(0x7f2d01477640):ZOO_INFO@log_env@1108: Client environment:host.name=mlxlabxkw73sis65c045e7-20240205022023-xcib3h-7ocnsp-worker
+2024-02-21 18:19:41,055:2026(0x7f2d01477640):ZOO_INFO@log_env@1115: Client environment:os.name=Linux
+2024-02-21 18:19:41,055:2026(0x7f2d01477640):ZOO_INFO@log_env@1116: Client environment:os.arch=5.4.143.bsk.8-amd64
+2024-02-21 18:19:41,055:2026(0x7f2d01477640):ZOO_INFO@log_env@1117: Client environment:os.version=#5.4.143.bsk.8 SMP Debian 5.4.143.bsk.8 Wed Jul 20 08:41:57 UTC 
+2024-02-21 18:19:41,055:2026(0x7f2d01477640):ZOO_INFO@log_env@1125: Client environment:user.name=(null)
+2024-02-21 18:19:41,056:2026(0x7f2d01477640):ZOO_INFO@log_env@1133: Client environment:user.home=/root
+2024-02-21 18:19:41,056:2026(0x7f2d01477640):ZOO_INFO@log_env@1145: Client environment:user.dir=/mnt/bn/shuaizzz/hpc/ecom_embedding_for_refusal/code_base/FlagEmbedding/FlagEmbedding
+2024-02-21 18:19:41,056:2026(0x7f2d01477640):ZOO_INFO@zookeeper_init_internal@1188: Initiating client connection, host=fdbd:dc05:0:19::155:2181,10.160.23.141:2181,10.160.20.162:2181,fdbd:dc05:0:31::141:2181,fdbd:dc05:0:19::162:2181,10.160.27.133:2181,fdbd:dc05:0:33::22:2181,fdbd:dc05:0:47::133:2181,10.160.20.155:2181,10.160.24.22:2181 sessionTimeout=6000 watcher=0x7f2d05325f10 sessionId=0 sessionPasswd=<null> context=0x7f2d005c1200 flags=0
+2024-02-21 18:19:41,056:2026(0x7f2d01477640):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,056:2026(0x7f2d01477640):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,056:2026(0x7f2d01477640):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,056:2026(0x7f2d01477640):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,056:2026(0x7f2d01477640):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,057:2026(0x7f2c88f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,057:2026(0x7f2c88f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,057:2026(0x7f2c88f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,057:2026(0x7f2c88f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,057:2026(0x7f2c88f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,059:2026(0x7f2c88f7f700):ZOO_INFO@check_events@2477: initiated connection to server [fdbd:dc05:0:19::155:2181]
+2024-02-21 18:19:41,059:2026(0x7f2c88f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,059:2026(0x7f2c88f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,059:2026(0x7f2c88f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,059:2026(0x7f2c88f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,059:2026(0x7f2c88f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,061:2026(0x7f2c88f7f700):ZOO_INFO@check_events@2529: session establishment complete on server [fdbd:dc05:0:19::155:2181], sessionId=0x650250eb839d17e9, negotiated timeout=10000 
+2024-02-21 18:19:41,061:2026(0x7f2c88f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,061:2026(0x7f2c88f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,061:2026(0x7f2c88f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,061:2026(0x7f2c88f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,061:2026(0x7f2c88f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,062:2026(0x7f2c88f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,062:2026(0x7f2c88f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,062:2026(0x7f2c88f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,062:2026(0x7f2c88f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,062:2026(0x7f2c88f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,062:2026(0x7f2c88f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,062:2026(0x7f2c88f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,062:2026(0x7f2c88f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,062:2026(0x7f2c88f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,062:2026(0x7f2c88f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,064:2026(0x7f2c88f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,064:2026(0x7f2c88f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,064:2026(0x7f2c88f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,064:2026(0x7f2c88f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,064:2026(0x7f2c88f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-02-21 18:19:41,113:2026(0x7f2d01477640):ZOO_INFO@zookeeper_close@3335: Closing zookeeper sessionId=0x650250eb839d17e9 to [fdbd:dc05:0:19::155:2181]
+
+2024-02-21 18:19:41,116:2026(0x7f2d01477640):ZOO_INFO@zookeeper_close@3357: Freeing zookeeper resources for sessionId=0x650250eb839d17e9
+
+2024-03-19 22:16:16,951:326(0x7fd18e01c640):ZOO_INFO@log_env@1104: Client environment:zookeeper.version=zookeeper C client 3.5.9
+2024-03-19 22:16:16,951:326(0x7fd18e01c640):ZOO_INFO@log_env@1108: Client environment:host.name=mlxlabxkw73sis65c045e7-20240205022023-xcib3h-d2mq4y-worker
+2024-03-19 22:16:16,951:326(0x7fd18e01c640):ZOO_INFO@log_env@1115: Client environment:os.name=Linux
+2024-03-19 22:16:16,951:326(0x7fd18e01c640):ZOO_INFO@log_env@1116: Client environment:os.arch=5.4.143.bsk.8-amd64
+2024-03-19 22:16:16,951:326(0x7fd18e01c640):ZOO_INFO@log_env@1117: Client environment:os.version=#5.4.143.bsk.8 SMP Debian 5.4.143.bsk.8 Wed Jul 20 08:41:57 UTC 
+2024-03-19 22:16:16,951:326(0x7fd18e01c640):ZOO_INFO@log_env@1125: Client environment:user.name=(null)
+2024-03-19 22:16:16,953:326(0x7fd18e01c640):ZOO_INFO@log_env@1133: Client environment:user.home=/root
+2024-03-19 22:16:16,953:326(0x7fd18e01c640):ZOO_INFO@log_env@1145: Client environment:user.dir=/mnt/bn/shuaizzz/hpc/ecom_embedding_for_refusal/code_base/FlagEmbedding/FlagEmbedding
+2024-03-19 22:16:16,953:326(0x7fd18e01c640):ZOO_INFO@zookeeper_init_internal@1188: Initiating client connection, host=fdbd:dc05:0:19::155:2181,10.160.23.141:2181,10.160.27.133:2181,fdbd:dc05:0:47::133:2181,fdbd:dc05:0:31::141:2181,10.160.20.162:2181,10.160.24.22:2181,10.160.20.155:2181,fdbd:dc05:0:33::22:2181,fdbd:dc05:0:19::162:2181 sessionTimeout=6000 watcher=0x7fd191ecaf10 sessionId=0 sessionPasswd=<null> context=0x7fd18cfc1200 flags=0
+2024-03-19 22:16:16,953:326(0x7fd18e01c640):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,953:326(0x7fd18e01c640):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,953:326(0x7fd18e01c640):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,953:326(0x7fd18e01c640):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,953:326(0x7fd18e01c640):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,953:326(0x7fd131f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,953:326(0x7fd131f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,953:326(0x7fd131f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,953:326(0x7fd131f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,953:326(0x7fd131f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,956:326(0x7fd131f7f700):ZOO_INFO@check_events@2477: initiated connection to server [fdbd:dc05:0:19::155:2181]
+2024-03-19 22:16:16,956:326(0x7fd131f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,956:326(0x7fd131f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,956:326(0x7fd131f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,956:326(0x7fd131f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,956:326(0x7fd131f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,959:326(0x7fd131f7f700):ZOO_INFO@check_events@2529: session establishment complete on server [fdbd:dc05:0:19::155:2181], sessionId=0x650250eb83e4d091, negotiated timeout=10000 
+2024-03-19 22:16:16,959:326(0x7fd131f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,959:326(0x7fd131f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,959:326(0x7fd131f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,959:326(0x7fd131f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,959:326(0x7fd131f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,968:326(0x7fd131f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,968:326(0x7fd131f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,968:326(0x7fd131f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,968:326(0x7fd131f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,968:326(0x7fd131f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,968:326(0x7fd131f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,968:326(0x7fd131f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,968:326(0x7fd131f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,968:326(0x7fd131f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,968:326(0x7fd131f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,971:326(0x7fd131f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.23.141: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,971:326(0x7fd131f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.27.133: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,971:326(0x7fd131f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.162: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,971:326(0x7fd131f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.24.22: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:16,971:326(0x7fd131f7f700):ZOO_ERROR@resolve_hosts@834: 10.160.20.155: getaddrinfo(): Address family for hostname not supported
+
+2024-03-19 22:16:18,072:326(0x7fd18e01c640):ZOO_INFO@zookeeper_close@3335: Closing zookeeper sessionId=0x650250eb83e4d091 to [fdbd:dc05:0:19::155:2181]
+
+2024-03-19 22:16:18,076:326(0x7fd18e01c640):ZOO_INFO@zookeeper_close@3357: Freeing zookeeper resources for sessionId=0x650250eb83e4d091
+
+2024-03-20 19:45:48,752:1152(0x7fafc7ee7640):ZOO_INFO@log_env@1104: Client environment:zookeeper.version=zookeeper C client 3.5.9
+2024-03-20 19:45:48,752:1152(0x7fafc7ee7640):ZOO_INFO@log_env@1108: Client environment:host.name=mlxlabxkw73sis65c045e7-20240205022023-xcib3h-l64rwu-worker
+2024-03-20 19:45:48,752:1152(0x7fafc7ee7640):ZOO_INFO@log_env@1115: Client environment:os.name=Linux
+2024-03-20 19:45:48,752:1152(0x7fafc7ee7640):ZOO_INFO@log_env@1116: Client environment:os.arch=5.4.143.bsk.8-amd64
+2024-03-20 19:45:48,752:1152(0x7fafc7ee7640):ZOO_INFO@log_env@1117: Client environment:os.version=#5.4.143.bsk.8 SMP Debian 5.4.143.bsk.8 Wed Jul 20 08:41:57 UTC 
+2024-03-20 19:45:48,752:1152(0x7fafc7ee7640):ZOO_INFO@log_env@1125: Client environment:user.name=(null)
+2024-03-20 19:45:48,753:1152(0x7fafc7ee7640):ZOO_INFO@log_env@1133: Client environment:user.home=/root
+2024-03-20 19:45:48,753:1152(0x7fafc7ee7640):ZOO_INFO@log_env@1145: Client environment:user.dir=/mnt/bn/shuaizzz/hpc/ecom_embedding_for_refusal/code_base/FlagEmbedding/FlagEmbedding
+2024-03-20 19:45:48,753:1152(0x7fafc7ee7640):ZOO_INFO@zookeeper_init_internal@1188: Initiating client connection, host=fdbd:dc05:0:19::155:2181,10.160.27.133:2181,10.160.24.22:2181,fdbd:dc05:0:47::133:2181,10.160.23.141:2181,fdbd:dc05:0:19::162:2181,fdbd:dc05:0:33::22:2181,10.160.20.155:2181,fdbd:dc05:0:31::141:2181,10.160.20.162:2181 sessionTimeout=6000 watcher=0x7fafcbd95f10 sessionId=0 sessionPasswd=<null> context=0x7fafc6fc1200 flags=0
+2024-03-20 19:45:48,755:1152(0x7faf6c17f700):ZOO_INFO@check_events@2477: initiated connection to server [10.160.24.22:2181]
+2024-03-20 19:45:48,757:1152(0x7faf6c17f700):ZOO_INFO@check_events@2529: session establishment complete on server [10.160.24.22:2181], sessionId=0x6702511ffb36fc31, negotiated timeout=10000 
+2024-03-20 19:45:51,118:1152(0x7fafc7ee7640):ZOO_INFO@zookeeper_close@3335: Closing zookeeper sessionId=0x6702511ffb36fc31 to [10.160.24.22:2181]
+
+2024-03-20 19:45:51,120:1152(0x7fafc7ee7640):ZOO_INFO@zookeeper_close@3357: Freeing zookeeper resources for sessionId=0x6702511ffb36fc31
+
