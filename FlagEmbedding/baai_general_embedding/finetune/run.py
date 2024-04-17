@@ -8,11 +8,11 @@ from transformers import (
     set_seed,
 )
 
-from arguments import ModelArguments, DataArguments, \
+from .arguments import ModelArguments, DataArguments, \
     RetrieverTrainingArguments as TrainingArguments
-from data import TrainDatasetForEmbedding, EmbedCollator, BalancedTrainDatasetForEmbedding
-from modeling import BiEncoderModel, my_modified_BiEncoderModel, my_modified_loss_1_BiEncoderModel, my_modified_loss_2_BiEncoderModel, Cocktail_BiEncoderModel
-from trainer import BiTrainer, MyCallback, BiTrainer_with_optimizer
+from .data import TrainDatasetForEmbedding, EmbedCollator
+from .modeling import BiEncoderModel
+from .trainer import BiTrainer
 
 logger = logging.getLogger(__name__)
 
@@ -56,7 +56,6 @@ def main():
     set_seed(training_args.seed)
 
     num_labels = 1
-    
     tokenizer = AutoTokenizer.from_pretrained(
         model_args.tokenizer_name if model_args.tokenizer_name else model_args.model_name_or_path,
         cache_dir=model_args.cache_dir,

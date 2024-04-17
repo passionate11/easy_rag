@@ -1,3 +1,4 @@
+from re import S
 from typing import cast, List, Union, Tuple, Optional, Dict
 import numpy as np
 from collections import defaultdict
@@ -30,6 +31,8 @@ class BGEM3FlagModel:
             pooling_method: str = 'cls',
             normalize_embeddings: bool = True,
             use_fp16: bool = True,
+            use_sparse: bool = True,
+            use_multivector: bool = True,
             device: str = None
     ) -> None:
 
@@ -39,6 +42,8 @@ class BGEM3FlagModel:
             sentence_pooling_method=pooling_method,
         )
 
+        self.use_sparse = use_sparse
+        self.use_multivector = use_multivector
         self.tokenizer = self.model.tokenizer
         if device:
             self.device = torch.device(device)
@@ -135,7 +140,7 @@ class BGEM3FlagModel:
 
         all_dense_embeddings, all_lexical_weights, all_colbert_vec = [], [], []
         for start_index in tqdm(range(0, len(sentences), batch_size), desc="Inference Embeddings",
-                                disable=len(sentences) < 256):
+                                disable=len(sentences) < 131072):
             sentences_batch = sentences[start_index:start_index + batch_size]
             batch_data = self.tokenizer(
                 sentences_batch,
@@ -202,6 +207,7 @@ class BGEM3FlagModel:
                 return_tensors='pt'
             )
 
+        
         if self.num_gpus > 0:
             batch_size *= self.num_gpus
         self.model.eval()
@@ -221,7 +227,7 @@ class BGEM3FlagModel:
             'colbert+sparse+dense': []
         }
         for start_index in tqdm(range(0, len(sentence_pairs), batch_size), desc="Compute Scores",
-                                disable=len(sentence_pairs) < 128):
+                                disable=len(sentence_pairs) < 131072):
             sentences_batch = sentence_pairs[start_index:start_index + batch_size]
 
             queries_batch = [pair[0] for pair in sentences_batch]
@@ -230,21 +236,63 @@ class BGEM3FlagModel:
             queries_inputs = _tokenize(queries_batch, max_length=max_query_length).to(self.device)
             corpus_inputs = _tokenize(corpus_batch, max_length=max_passage_length).to(self.device)
 
-            queries_output = self.model(queries_inputs, return_dense=True, return_sparse=True, return_colbert=True,
+            
+            if self.use_sparse is False and self.use_multivector is False:
+                queries_output = self.model(queries_inputs, return_dense=True, return_sparse=False, return_colbert=False,
+                                            return_sparse_embedding=True)
+                corpus_output = self.model(corpus_inputs, return_dense=True, return_sparse=False, return_colbert=False,
                                         return_sparse_embedding=True)
-            corpus_output = self.model(corpus_inputs, return_dense=True, return_sparse=True, return_colbert=True,
-                                       return_sparse_embedding=True)
 
-            q_dense_vecs, q_sparse_vecs, q_colbert_vecs = queries_output['dense_vecs'], queries_output['sparse_vecs'], \
-            queries_output['colbert_vecs']
-            p_dense_vecs, p_sparse_vecs, p_colbert_vecs = corpus_output['dense_vecs'], corpus_output['sparse_vecs'], \
-            corpus_output['colbert_vecs']
+                q_dense_vecs  = queries_output['dense_vecs']
+                p_dense_vecs = corpus_output['dense_vecs']
+            elif self.use_sparse is False:
+                queries_output = self.model(queries_inputs, return_dense=True, return_sparse=False, return_colbert=True,
+                                            return_sparse_embedding=True)
+                corpus_output = self.model(corpus_inputs, return_dense=True, return_sparse=False, return_colbert=True,
+                                        return_sparse_embedding=True)
+
+                q_dense_vecs, q_colbert_vecs = queries_output['dense_vecs'], \
+                queries_output['colbert_vecs']
+                p_dense_vecs, p_colbert_vecs = corpus_output['dense_vecs'], \
+                corpus_output['colbert_vecs']
+            elif self.use_multivector is False:
+                queries_output = self.model(queries_inputs, return_dense=True, return_sparse=True, return_colbert=False,
+                                            return_sparse_embedding=True)
+                corpus_output = self.model(corpus_inputs, return_dense=True, return_sparse=True, return_colbert=False,
+                                        return_sparse_embedding=True)
+
+                q_dense_vecs, q_sparse_vecs = queries_output['dense_vecs'], queries_output['sparse_vecs']
+                p_dense_vecs, p_sparse_vecs = corpus_output['dense_vecs'], corpus_output['sparse_vecs']
+
+            elif self.use_sparse is True and self.use_multivector is True:
+                queries_output = self.model(queries_inputs, return_dense=True, return_sparse=True, return_colbert=True,
+                                            return_sparse_embedding=True)
+                corpus_output = self.model(corpus_inputs, return_dense=True, return_sparse=True, return_colbert=True,
+                                        return_sparse_embedding=True)
+
+                q_dense_vecs, q_sparse_vecs, q_colbert_vecs = queries_output['dense_vecs'], queries_output['sparse_vecs'], \
+                queries_output['colbert_vecs']
+                p_dense_vecs, p_sparse_vecs, p_colbert_vecs = corpus_output['dense_vecs'], corpus_output['sparse_vecs'], \
+                corpus_output['colbert_vecs']
+
 
             dense_scores = self.model.dense_score(q_dense_vecs, p_dense_vecs)
-            sparse_scores = self.model.sparse_score(q_sparse_vecs, p_sparse_vecs)
-            colbert_scores = self.model.colbert_score(q_colbert_vecs, p_colbert_vecs,
-                                                      q_mask=queries_inputs['attention_mask'])
+            if self.use_multivector is False and self.use_sparse is False:
+                sparse_scores = torch.zeros_like(dense_scores)
+                colbert_scores = torch.zeros_like(dense_scores)
+            elif self.use_sparse is False:
+                sparse_scores = torch.zeros_like(dense_scores)
+                colbert_scores = self.model.colbert_score(q_colbert_vecs, p_colbert_vecs,
+                                                        q_mask=queries_inputs['attention_mask'])
+            elif self.use_multivector is False:
+                sparse_scores = self.model.sparse_score(q_sparse_vecs, p_sparse_vecs)
+                colbert_scores = torch.zeros_like(dense_scores)
+            elif self.use_sparse is True and self.use_multivector is True:
+                sparse_scores = self.model.sparse_score(q_sparse_vecs, p_sparse_vecs)
+                colbert_scores = self.model.colbert_score(q_colbert_vecs, p_colbert_vecs,
+                                                        q_mask=queries_inputs['attention_mask'])
 
+                
             if weights_for_different_modes is None:
                 weights_for_different_modes = [1, 1., 1.]
                 weight_sum = 3

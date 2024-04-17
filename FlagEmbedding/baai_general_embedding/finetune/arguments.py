@@ -23,6 +23,7 @@ class ModelArguments:
     cache_dir: Optional[str] = field(
         default=None, metadata={"help": "Where do you want to store the pretrained models downloaded from s3"}
     )
+    # my arguments
     use_my_modified_loss_model: str = field(
         default='0', metadata={"help": "whether to use my modified loss model, 0:no 1:batch no pos 2:softmax 1"})
     use_balanced_dataset_and_loss: str = field(
