@@ -8,10 +8,10 @@ from transformers import (
     set_seed,
 )
 
-from .arguments import ModelArguments, DataArguments
-from .data import TrainDatasetForCE, GroupCollator
-from .modeling import CrossEncoder
-from .trainer import CETrainer
+from arguments import ModelArguments, DataArguments
+from data import TrainDatasetForCE, GroupCollator
+from modeling import CrossEncoder
+from trainer import CETrainer
 
 logger = logging.getLogger(__name__)
 

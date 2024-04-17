@@ -31,6 +31,10 @@ ecom_Rag基于Flagembedding上进行二次开发，致力于提供治理测垂�
 
 
 ## 更新
+- 4/17/2014: 将scripts更名为rag_scripts, 添加2_reranker.py, 支持对多路召回结果进行rerank
+    - 支持使用m3-v2-rerank进行精排
+    - 输入数据格式{'text': 待检索数据/ ,'metadata': 数据相关信息, 'topk_sim': topk相似分数, 'topk_seed': topk结果, 'topk_metadata': topk元数据}
+    - 会根据text和topk_seed中的数据新的相关性对['topk_sim', 'topk_seed', 'topk_metadata']进行重排序
 - 4/10/2024: 添加scripts/1_scorer.py，提供方便的检索服务
     - 支持bge/m3两个模型的检索，输入query和documents，输出documents的相似度分数及相关信息 |
     - 输入数据格式:{'text': 待检索数据/doc数据, 'metadata':数据相关信息} | 
@@ -39,6 +43,7 @@ ecom_Rag基于Flagembedding上进行二次开发，致力于提供治理测垂�
     - circle loss
     - Balanced dataset
     - model merging weights training
+
 
 ## 即将支持
 - 添加reranker链路代码

@@ -5,7 +5,7 @@ from torch import nn
 from transformers import AutoModelForSequenceClassification, PreTrainedModel, TrainingArguments
 from transformers.modeling_outputs import SequenceClassifierOutput
 
-from .arguments import ModelArguments, DataArguments
+from arguments import ModelArguments, DataArguments
 
 logger = logging.getLogger(__name__)
 
@@ -39,7 +39,7 @@ class CrossEncoder(nn.Module):
                 self.train_args.per_device_train_batch_size,
                 self.data_args.train_group_size
             )
-            loss = self.cross_entropy(scores, self.target_label)
+            loss = self.compute_loss(scores, self.target_label)
 
             return SequenceClassifierOutput(
                 loss=loss,
@@ -47,6 +47,14 @@ class CrossEncoder(nn.Module):
             )
         else:
             return ranker_out
+
+    def compute_loss(self, scores, target):
+        if self.model_args.use_my_modified_loss_model == '0':
+            return self.cross_entropy(scores, target)
+        elif self.model_args.use_my_modified_loss_model == '1':
+            # circle loss
+            scores = nn.functional.softmax(scores, dim=-1)
+            return self.cross_entropy(scores, target)
 
     @classmethod
     def from_pretrained(
