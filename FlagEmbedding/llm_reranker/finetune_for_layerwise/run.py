@@ -8,12 +8,12 @@ from transformers import (
     set_seed,
 )
 
-from .arguments import ModelArguments, DataArguments, \
+from arguments import ModelArguments, DataArguments, \
     RetrieverTrainingArguments as TrainingArguments
-from .data import TrainDatasetForReranker, RerankCollator
-from .modeling import BiEncoderModel
-from .trainer import BiTrainer
-from .load_model import get_model
+from data import TrainDatasetForReranker, RerankCollator
+from modeling import BiEncoderModel
+from trainer import BiTrainer
+from load_model import get_model
 
 logger = logging.getLogger(__name__)
 

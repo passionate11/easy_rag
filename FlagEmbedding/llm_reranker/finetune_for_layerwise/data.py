@@ -13,7 +13,7 @@ from torch.utils.data import Dataset
 from transformers import DataCollatorForSeq2Seq
 from transformers import PreTrainedTokenizer, BatchEncoding
 
-from .arguments import DataArguments
+from arguments import DataArguments
 
 
 class TrainDatasetForReranker(Dataset):

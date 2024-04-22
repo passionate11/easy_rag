@@ -1,7 +1,7 @@
 import torch
 from torch import nn
 from transformers import AutoConfig
-from .modeling_minicpm_reranker import LayerWiseMiniCPMForCausalLM, LayerWiseHead
+from modeling_minicpm_reranker import LayerWiseMiniCPMForCausalLM, LayerWiseHead
 from peft import LoraConfig, TaskType, get_peft_model, PeftModel
 
 
