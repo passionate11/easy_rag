@@ -6,8 +6,9 @@ from tqdm import tqdm
 from collections import defaultdict
 import os
 import argparse
-from FlagEmbedding import BGEM3FlagModel, FlagReranker
+from FlagEmbedding import BGEM3FlagModel, FlagReranker, LayerWiseFlagLLMReranker
 from sentence_transformers import SentenceTransformer
+
 
 device = 'cuda' if cuda.is_available() else 'cpu'
 
@@ -23,13 +24,14 @@ class Reranker():
         self.topk = topk
         self.in_to_rerank_data_path = in_to_rerank_data_path
         self.out_reranked_path = out_reranked_path
+        
+        self.in_to_rerank_data_path_list = in_to_rerank_data_path.split(',')
+        if len(self.in_to_rerank_data_path_list) > 1:
+            self.multi_recall = True
+        else:
+            self.multi_recall = False
     
-    # 调用函数
-    def get_rerank_score(self):
-        print(f'********** Using {self.model_type} for rerank **********')
-        if self.model_type == 'm3-reranker-v2':
-            rerank_model = FlagReranker(self.model_path, use_fp16=True)
-            self.biencoder_reranker_scorer(rerank_model, self.m3_reranker_v2_score)
+    
     # utils
     def read_data(self, data_path):
         data = []
@@ -47,9 +49,29 @@ class Reranker():
         scores = rerank_model.compute_score(batch_data, normalize=normalize, batch_size=batch_size, max_length=1024)
         return scores
 
+    def minicpm_reranker_score(self, rerank_model, normalize, batch_data):
+        batch_size = len(batch_data)
+        scores = rerank_model.compute_score(batch_data, normalize=normalize, batch_size=batch_size, max_length=1024)
+        return scores
+
     # bge/m3等
     def biencoder_reranker_scorer(self, rerank_model, rerank_score_func):
-        all_data = self.read_data(self.in_to_rerank_data_path)
+        if self.multi_recall is True:    # 如果是多路召回
+            all_data = []
+
+            for idx, data_path in enumerate(self.in_to_rerank_data_path_list):
+                
+                if idx == 0:
+                    all_data = self.read_data(data_path)
+                else:
+                    cur_all_data = self.read_data(data_path)
+                    for tmp_idx, tmp_data in enumerate(cur_all_data):
+                        all_data[tmp_idx]['topk_sim'].extend(tmp_data['topk_sim'])
+                        all_data[tmp_idx]['topk_seed'].extend(tmp_data['topk_seed'])
+                        all_data[tmp_idx]['topk_metadata'].extend(tmp_data['topk_metadata'])
+        else:
+            all_data = self.read_data(self.in_to_rerank_data_path)
+
         all_top_seed = []
         for tmp in all_data:
             all_top_seed.append(tmp['topk_seed'])
@@ -93,6 +115,15 @@ class Reranker():
 
                 progress_bar.update(mini_batch)
 
+    # 调用函数
+    def get_rerank_score(self):
+        print(f'********** Using {self.model_type} for rerank **********')
+        if self.model_type == 'm3-reranker-v2':
+            rerank_model = FlagReranker(self.model_path, use_fp16=True)
+            self.biencoder_reranker_scorer(rerank_model, self.m3_reranker_v2_score)
+        elif self.model_type == 'minicpm-rearnker':
+            rerank_model = LayerWiseFlagLLMReranker(self.model_path, use_bf16=True)
+            self.biencoder_reranker_scorer(rerank_model, self.minicpm_reranker_score)
 
 parser = argparse.ArgumentParser(description='Reranker启动！')
 

@@ -9,6 +9,9 @@ import os
 import argparse
 from FlagEmbedding import BGEM3FlagModel
 from sentence_transformers import SentenceTransformer
+import jieba
+from rank_bm25 import BM25Okapi
+import numpy as np
 
 device = 'cuda' if cuda.is_available() else 'cpu'
 
@@ -76,28 +79,29 @@ class Scorer():
                         weights_for_different_modes=weights_for_different_modes)['dense']
                         #   ['colbert+sparse+dense']
 
+    def bm25_score(self, model, sentence_pairs):
+        self.model = BM25Okapi()
+
     # 会根据不同的模型类别调用不同的scorer，目前支持bge检索和m3的混合检索
     def get_retrieval_score(self):
+        print(f'********** using {self.model_type} for scorer **********')
         if self.model_type == 'bge':
-            print(f'********** using bge_kind_model for scorer **********')
             model = SentenceTransformer(self.model_path, device=device)
             self.embedding_scorer(model, self.bge_encode)
         elif self.model_type == 'm3_dense':
-            print(f'********** using m3_dense for scorer **********')
             model = BGEM3FlagModel(self.model_path, use_fp16=True)
             self.embedding_scorer(model, self.m3_dense_encode)
         elif self.model_type == 'm3_sparse':    # TODO sparse和multivector计算最终相似度的分数不一样，这里之后再支持吧
-            print(f'********** using m3_sparse for scorer **********')
             model = BGEM3FlagModel(self.model_path, use_fp16=True)
             self.embedding_scorer(model, self.m3_sparse_encode)
         elif self.model_type == 'm3_multivector':
-            print(f'********** using m3_multivector for scorer **********')
             model = BGEM3FlagModel(self.model_path, use_fp16=True)
             self.embedding_scorer(model, self.m3_multi_vector_encode)
         elif self.model_type == 'm3_score':
-            print(f'********** using m3_kind_model for scorer **********')
             model = BGEM3FlagModel(self.model_path, use_multivector=False, use_sparse=False, use_fp16=True)
             self.no_embedding_scorer(model, self.m3_score)
+        elif self.model_type == 'sparse-bm25':
+            self.no_embedding_scorer()
         else:
             print(f'the model type is wrong ! Please recheck the parameter !')
     
@@ -203,15 +207,13 @@ class Scorer():
                 writer.write(to_write_data)
 
     # 有的模型直接输出score，没有中间embedding
-    def no_embedding_scorer(self, model, score_func):
+    def no_embedding_scorer(self, model=None, score_func=None):
         # 如果模型直接输出分数而不是embedding，则不能保存中间embedding结果
         self.sava_intermediate_res = False
 
         # TODO 这里记得补全
         test_data = self.data_reader(self.in_test_data)
         seed_data = self.data_reader(self.in_seed_data)
-
-        
 
         test_text, test_metadata = [], []
         seed_text, seed_metadata = [], [] 
@@ -223,33 +225,47 @@ class Scorer():
             seed_metadata.append(tmp['metadata'])
 
         score_list = []
-        progress_bar = tqdm(total=len(test_data), desc="cal m3 sim scores...")
 
-        # 为了计算方便，这里的marco_batch 为self.batch_size //  len(seed_data)
-        marco_batch = 1 if self.batch_size < len(seed_data) else self.batch_size // len(seed_text)
+        if self.model_type == 'sparse-bm25':
+            progress_bar = tqdm(total=len(test_data), desc=f"cal {model} sim scores...")
+            tokenized_test_text = [list(jieba.cut(tmp)) for tmp in test_text]
+            tokenized_seed_text = [list(jieba.cut(tmp)) for tmp in seed_text]
+            bm25_model = BM25Okapi(tokenized_seed_text)
+
+            for data in tokenized_test_text:
+                cur_scores = bm25_model.get_scores(data)
+                score_list.append(cur_scores)
+                # print(f'score_list.shape is :{np.array(score_list).shape}')
+                progress_bar.update(1)
+
+        else:   # 一些模型直接输出两个句子的相似性分数
+            progress_bar = tqdm(total=len(test_data), desc=f"cal {model} sim scores...")
+
+            # 为了计算方便，这里的marco_batch 为self.batch_size //  len(seed_data)
+            marco_batch = 1 if self.batch_size < len(seed_data) else self.batch_size // len(seed_text)
         
-        for marco_idx in range(0, len(test_text), marco_batch):
-            cur_batch = []
-            for tmp in range(marco_batch):
-                for cur_seed_data in seed_text:
-                    cur_batch.append([test_text[marco_idx+tmp], cur_seed_data])
+            for marco_idx in range(0, len(test_text), marco_batch):
+                cur_batch = []
+                for tmp in range(marco_batch):
+                    for cur_seed_data in seed_text:
+                        cur_batch.append([test_text[marco_idx+tmp], cur_seed_data])
 
-            
-            cur_scores = score_func(model=model, sentence_pairs=cur_batch)            
-     
-            seed_len = len(cur_scores) / marco_batch
-            seed_len = int(seed_len)
+                cur_scores = score_func(model=model, sentence_pairs=cur_batch)            
+        
+                seed_len = len(cur_scores) / marco_batch
+                seed_len = int(seed_len)
 
-            for tmp in range(marco_batch):
-                score_list.append(cur_scores[tmp*seed_len:(tmp+1)*seed_len])
+                for tmp in range(marco_batch):
+                    score_list.append(cur_scores[tmp*seed_len:(tmp+1)*seed_len])
 
-            progress_bar.update(marco_batch)
+                progress_bar.update(marco_batch)
 
 
         results = defaultdict(list)
         
         score_list = torch.tensor(score_list)
-        
+        print(f'score_list.shape is :{score_list.shape}')
+        score_list = torch.nn.functional.softmax(score_list, dim=-1)
         top_k_similarities, top_k_indices = torch.topk(score_list, self.topk, dim=1)
         top_k_similarities = top_k_similarities.tolist()
         top_k_indices = top_k_indices.tolist()

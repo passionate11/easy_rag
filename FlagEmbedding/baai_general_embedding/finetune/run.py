@@ -10,9 +10,9 @@ from transformers import (
 
 from arguments import ModelArguments, DataArguments, \
     RetrieverTrainingArguments as TrainingArguments
-from data import TrainDatasetForEmbedding, EmbedCollator
-from modeling import BiEncoderModel
-from trainer import BiTrainer
+from data import TrainDatasetForEmbedding, EmbedCollator, BalancedTrainDatasetForEmbedding
+from modeling import BiEncoderModel, my_modified_BiEncoderModel, my_modified_loss_1_BiEncoderModel,my_modified_loss_2_BiEncoderModel,Cocktail_BiEncoderModel
+from trainer import BiTrainer, MyCallback, BiTrainer_with_optimizer
 
 logger = logging.getLogger(__name__)
 

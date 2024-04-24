@@ -72,3 +72,22 @@ class CrossEncoder(nn.Module):
              for k,
              v in state_dict.items()})
         self.hf_model.save_pretrained(output_dir, state_dict=state_dict)
+
+
+class MixLayer(nn.Module):
+
+    def __init__(self, layer_list, weight_list):
+        super().__init__()
+        self.layer_list = nn.ModuleList(layer_list)
+        self.model_weight = weight_list
+
+    def forward(self, x):
+        layer_output_list = []
+        for layer in self.layer_list:
+            layer_output_list.append(layer(x))
+        layer_output_shape = layer_output_list[0].shape
+        layer_output = torch.cat(layer_output_list, 0).reshape(len(self.layer_list), *layer_output_shape)
+        weight = nn.functional.softmax(self.model_weight)
+        # print(f'mix weight:{weight}')
+        weight = weight.reshape([-1] + [1] * len(layer_output_shape))
+        return (layer_output * weight).sum(0)

@@ -385,6 +385,8 @@ class Cocktail_BiEncoderModel(BiEncoderModel):
         q_reps = self.encode(query)
         p_reps = self.encode(passage)
 
+        print(f'mix weight:{self.weight_list}')
+
         if self.training:
             if self.negatives_cross_device and self.use_inbatch_neg:
                 q_reps = self._dist_gather_tensor(q_reps)
