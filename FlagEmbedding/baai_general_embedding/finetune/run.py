@@ -9,7 +9,7 @@ from transformers import (
 )
 
 from arguments import ModelArguments, DataArguments, \
-    RetrieverTrainingArguments as TrainingArguments
+    RetrieverTrainingArguments, SchedulerArguments as TrainingArguments
 from data import TrainDatasetForEmbedding, EmbedCollator, BalancedTrainDatasetForEmbedding
 from modeling import BiEncoderModel, my_modified_BiEncoderModel, my_modified_loss_1_BiEncoderModel,my_modified_loss_2_BiEncoderModel,Cocktail_BiEncoderModel
 from trainer import BiTrainer, MyCallback, BiTrainer_with_optimizer
@@ -18,8 +18,8 @@ logger = logging.getLogger(__name__)
 
 
 def main():
-    parser = HfArgumentParser((ModelArguments, DataArguments, TrainingArguments))
-    model_args, data_args, training_args = parser.parse_args_into_dataclasses()
+    parser = HfArgumentParser((ModelArguments, SchedulerArguments, DataArguments, TrainingArguments))
+    model_args, scheduler_args, data_args, training_args = parser.parse_args_into_dataclasses()
     model_args: ModelArguments
     data_args: DataArguments
     training_args: TrainingArguments
@@ -151,6 +151,16 @@ def main():
             custom_optimizer=cocktail_optimizer,
             tokenizer=tokenizer
         )
+    elif scheduler_args.use_my_wsd_sceduler == '1':
+        logger.info(f'using BiTrainer_with_optimizer')
+        trainer = BiTrainer_with_optimizer(
+            model=model,
+            args=training_args,
+            scheduler_args=scheduler_args,
+            train_dataset=train_dataset,
+            data_collator=EmbedCollator(
+                tokenizer,
+                query_max_len=data_args.query_
     else:
         trainer = BiTrainer(
             model=model,

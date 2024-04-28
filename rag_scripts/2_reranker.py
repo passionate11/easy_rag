@@ -124,6 +124,9 @@ class Reranker():
         elif self.model_type == 'minicpm-rearnker':
             rerank_model = LayerWiseFlagLLMReranker(self.model_path, use_bf16=True)
             self.biencoder_reranker_scorer(rerank_model, self.minicpm_reranker_score)
+        else:
+            print(f'{self.model_type} is not supported!')
+            exit()
 
 parser = argparse.ArgumentParser(description='Reranker启动！')
 

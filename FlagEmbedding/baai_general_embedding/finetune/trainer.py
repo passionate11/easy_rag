@@ -3,6 +3,8 @@ from transformers.trainer import *
 from transformers.trainer_utils import is_main_process
 from transformers import TrainerCallback, TrainerState, TrainerControl, IntervalStrategy
 import torch.optim as optim
+import torch
+from torch.optim.lr_scheduler import StepLR, CosineAnnealingLR, SequentialLR, LinearLR, ConstantLR, ReduceLROnPlateau
 
 
 def save_ckpt_for_sentence_transformers(ckpt_dir, pooling_mode: str = 'cls', normlized: bool=True):
@@ -119,3 +121,34 @@ class BiTrainer_with_optimizer(BiTrainer):
             self.optimizer = optim.AdamW(self.model.parameters(), lr=5e-5)
         
         super().create_optimizer_and_scheduler(num_training_steps)
+
+def get_wsd_scheduler(scheduler_args, optimizer, training_steps):
+    W = scheduler_args.warmup_steps
+    S = int(scheduler_args.stable_ratio *training_steps)
+    D = training_steps-W-S
+    
+    warmup_scheduler = LinearLR(optimizer, start_factor=1/W, total_iters=W)
+    stable_scheduler = ConstantLR(optimizer, factor=1.0, total_iters=S)
+    decay_scheduler = LinearLR(optimizer, start_factor=1.0, end_factor=1/D,total_iters=D)
+    
+    milestones = [W, W+S]
+    wsd_scheduler = SequentialLR(optimizer, schedulers=[warmup_scheduler, stable_scheduler, decay_scheduler], milestones=milestones)
+    
+    return wsd_scheduler
+
+class BiTrainer_with_wsd_scheduler(BiTrainer):
+    def __init__(self, *args, scheduler_args=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.scheduler_args = scheduler_args
+
+    def create_optimizer_and_scheduler(self, num_training_steps: int):
+        # 定义优化器，假设 scheduler_args 已经包含了所有必要的参数
+        self.optimizer = optim.AdamW(self.model.parameters(),
+                                     lr=self.scheduler_args.lr,
+                                     betas=self.scheduler_args.betas,
+                                     eps=self.scheduler_args.eps,
+                                     weight_decay=self.scheduler_args.weight_decay,
+                                     correct_bias=self.scheduler_args.correct_bias)
+
+        # 使用自定义的学习率调度器
+        self.lr_scheduler = get_wsd_scheduler(self.scheduler_args, self.optimizer, num_training_steps)

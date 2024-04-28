@@ -1,7 +1,8 @@
+from email.policy import default
 import os
 from dataclasses import dataclass, field
 from typing import Optional
-
+import typing
 from transformers import TrainingArguments
 
 
@@ -33,6 +34,41 @@ class ModelArguments:
     cocktail_model_list: str = field(
         default=None, metadata={"help": "cocktail时的多个模型列表"})
 
+@dataclass
+class SchedulerArguments:
+    """
+    Arguments pertaining to which model/config/tokenizer we are going to fine-tune from.
+    """
+    use_my_wsd_sceduler: str = field(
+        default='0', metadata={"help": "whether to use my wsd scheduler, 0:no 1: yes "})
+    # for adamw
+    lr: str = field(
+        default=0.001, metadata={"help": "learning rate"}
+    )
+    betas: typing.Tuple[float, float] = field(
+        default=(0.9, 0.999), metadata={"help": "betas for adamw"}
+    )
+    eps: float = field(
+        default=1e-06, metadata={"help": "eps for adamw"}
+    )
+    weight_decay: float = field(
+        default=0.0, metadata={"help": "weight decay for adamw"}
+    )
+    correct_bias: bool = field(
+        default=True, metadata={"help": "whether to correct bias for adamw"}
+    )
+    no_deprecation_warning: bool = field(
+        default=False, metadata={"help": "whether to disable deprecation warnings"}
+    )
+    # for wsd
+    warmup_steps: int = field(
+        default=1000, metadata={"help": "the warmup steps for wsd scheduler"}
+    )
+    stable_ratio: float = field(
+        default=0.1, metadata={"help": "the stable ratio for wsd scheduler"}
+    )
+
+    
 @dataclass
 class DataArguments:
     train_data: str = field(
