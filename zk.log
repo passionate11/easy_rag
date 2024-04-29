@@ -238,3 +238,18 @@
 
 2024-04-25 11:20:56,107:63(0x7efeeb6fc640):ZOO_INFO@zookeeper_close@3357: Freeing zookeeper resources for sessionId=0x6802513803f372f7
 
+2024-04-28 11:47:37,464:71(0x7fabd7888640):ZOO_INFO@log_env@1104: Client environment:zookeeper.version=zookeeper C client 3.5.9
+2024-04-28 11:47:37,464:71(0x7fabd7888640):ZOO_INFO@log_env@1108: Client environment:host.name=mlxlabxkw73sis65c045e7-20240205022023-xcib3h-m2u3ex-worker
+2024-04-28 11:47:37,464:71(0x7fabd7888640):ZOO_INFO@log_env@1115: Client environment:os.name=Linux
+2024-04-28 11:47:37,464:71(0x7fabd7888640):ZOO_INFO@log_env@1116: Client environment:os.arch=5.4.143.bsk.8-amd64
+2024-04-28 11:47:37,464:71(0x7fabd7888640):ZOO_INFO@log_env@1117: Client environment:os.version=#5.4.143.bsk.8 SMP Debian 5.4.143.bsk.8 Wed Jul 20 08:41:57 UTC 
+2024-04-28 11:47:37,464:71(0x7fabd7888640):ZOO_INFO@log_env@1125: Client environment:user.name=(null)
+2024-04-28 11:47:37,465:71(0x7fabd7888640):ZOO_INFO@log_env@1133: Client environment:user.home=/root
+2024-04-28 11:47:37,465:71(0x7fabd7888640):ZOO_INFO@log_env@1145: Client environment:user.dir=/mnt/bn/shuaizzz/hpc/ecom_embedding_for_refusal/code_base/ecom_Rag
+2024-04-28 11:47:37,465:71(0x7fabd7888640):ZOO_INFO@zookeeper_init_internal@1188: Initiating client connection, host=10.160.23.141:2181,fdbd:dc05:0:19::162:2181,fdbd:dc05:0:47::133:2181,fdbd:dc05:0:31::141:2181,fdbd:dc05:0:19::155:2181,10.160.20.162:2181,10.160.24.22:2181,fdbd:dc05:0:33::22:2181,10.160.20.155:2181,10.160.27.133:2181 sessionTimeout=6000 watcher=0x7fabdb736f10 sessionId=0 sessionPasswd=<null> context=0x7fabd69c1200 flags=0
+2024-04-28 11:47:37,468:71(0x7fab7b37f700):ZOO_INFO@check_events@2477: initiated connection to server [fdbd:dc05:0:19::155:2181]
+2024-04-28 11:47:37,470:71(0x7fab7b37f700):ZOO_INFO@check_events@2529: session establishment complete on server [fdbd:dc05:0:19::155:2181], sessionId=0x650250eb8442c15e, negotiated timeout=10000 
+2024-04-28 11:47:37,639:71(0x7fabd7888640):ZOO_INFO@zookeeper_close@3335: Closing zookeeper sessionId=0x650250eb8442c15e to [fdbd:dc05:0:19::155:2181]
+
+2024-04-28 11:47:37,643:71(0x7fabd7888640):ZOO_INFO@zookeeper_close@3357: Freeing zookeeper resources for sessionId=0x650250eb8442c15e
+

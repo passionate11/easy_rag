@@ -42,7 +42,6 @@ class BiEncoderModel(nn.Module):
         self.model.enable_input_require_grads(**kwargs)
 
     def encode(self, features):
-        # input('continue?')
         if features is None:
             return None
         outputs = self.model(input_ids=features['input_ids'],
@@ -54,11 +53,10 @@ class BiEncoderModel(nn.Module):
         logits = [outputs.logits[i, predict_indices[i], :] for i in range(outputs.logits.shape[0])]
         logits = torch.stack(logits, dim=0)
         scores = logits[:, self.yes_loc]
-        return scores.contiguous()
+        return scores.contiguous()  # batch_size
 
     def forward(self, pair: Union[Dict[str, Tensor], List[Dict[str, Tensor]]] = None):
-        ranker_logits = self.encode(pair) # (batch_size * num, dim)
-
+        ranker_logits = self.encode(pair) # (batch_size, group_size)
         if self.training:
             grouped_logits = ranker_logits.view(self.train_batch_size, -1)
             target = torch.zeros(self.train_batch_size, device=grouped_logits.device, dtype=torch.long)
@@ -66,7 +64,6 @@ class BiEncoderModel(nn.Module):
         else:
             loss = None
 
-        # print(loss)
         return RerankerOutput(
             loss=loss,
             scores=ranker_logits,
@@ -101,10 +98,10 @@ class ListwiseRerankerModel(BiEncoderModel):
 
 
     def forward(self, pair: Union[Dict[str, Tensor], List[Dict[str, Tensor]]] = None):
-        ranker_logits = self.encode(pair) # (batch_size * num, dim)
+        ranker_logits = self.encode(pair) # (batch_size * grou_size)
 
         if self.training:
-            grouped_logits = ranker_logits.view(self.train_batch_size, -1)  # bsz * len(passages)
+            grouped_logits = ranker_logits.view(self.train_batch_size, -1)  # [bsz, group_size]
             pairwise_differences = grouped_logits[:, :-1] - grouped_logits[:, 1:]
             losses = torch.clamp(self.margin - pairwise_differences, min=0)
             total_loss = losses.sum(dim=1).mean()
@@ -113,9 +110,8 @@ class ListwiseRerankerModel(BiEncoderModel):
         else:
             loss = None
 
-        # print(loss)
         return RerankerOutput(
-            loss=loss,
+            loss=total_loss,
             scores=ranker_logits,
         )
 

@@ -13,7 +13,7 @@ from torch.utils.data import Dataset
 from transformers import DataCollatorForSeq2Seq
 from transformers import PreTrainedTokenizer, BatchEncoding
 
-from .arguments import DataArguments
+from arguments import DataArguments
 
 
 class TrainDatasetForReranker(Dataset):
@@ -218,7 +218,7 @@ class RerankCollator(DataCollatorForSeq2Seq):
         if return_tensors is None:
             return_tensors = self.return_tensors
 
-        # [[1,2], [3,4]] -> [1,2,3,4]
+        # [[1,2], [3,4]] -> [1,2,3,4]   # 
         if isinstance(features[0], list):
             features = sum(features, [])
 

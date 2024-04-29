@@ -154,3 +154,11 @@ class DataArguments:
 @dataclass
 class RetrieverTrainingArguments(TrainingArguments):
     loss_type: str = field(default='only logits')
+
+
+@dataclass
+class ListwiseModelingArguments:
+    use_listwise_llm_rerank: str = field(
+        default='0', metadata={"help": "0: use the origin loss, 1: use instruction_llm_listwise modeling and loss"}
+    )
+    

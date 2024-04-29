@@ -8,19 +8,20 @@ from transformers import (
     set_seed,
 )
 
-from .arguments import ModelArguments, DataArguments, \
+from arguments import ModelArguments, DataArguments, \
     RetrieverTrainingArguments as TrainingArguments
-from .data import TrainDatasetForReranker, RerankCollator
-from .modeling import BiEncoderModel
-from .trainer import BiTrainer
-from .load_model import get_model
+from arguments import ListwiseModelingArguments
+from data import TrainDatasetForReranker, RerankCollator, ListwiseTrainDatasetForReranker
+from modeling import BiEncoderModel, ListwiseRerankerModel
+from trainer import BiTrainer
+from load_model import get_model
 
 logger = logging.getLogger(__name__)
 
 
 def main():
-    parser = HfArgumentParser((ModelArguments, DataArguments, TrainingArguments))
-    model_args, data_args, training_args = parser.parse_args_into_dataclasses()
+    parser = HfArgumentParser((ModelArguments, DataArguments, TrainingArguments, ListwiseModelingArguments))
+    model_args, data_args, training_args, listwise_args = parser.parse_args_into_dataclasses()
     model_args: ModelArguments
     data_args: DataArguments
     training_args: TrainingArguments
@@ -85,16 +86,25 @@ def main():
     )
     logger.info('Config: %s', config)
 
-    model = BiEncoderModel(model=base_model,
-                           tokenizer=tokenizer,
-                           train_batch_size=training_args.per_device_train_batch_size)
+    if listwise_args.use_listwise_llm_rerank == '1':
+        model = ListwiseRerankerModel(model=base_model,
+                            tokenizer=tokenizer,
+                            train_batch_size=training_args.per_device_train_batch_size)
+    else:
+        model = BiEncoderModel(model=base_model,
+                            tokenizer=tokenizer,
+                            train_batch_size=training_args.per_device_train_batch_size)
 
     # model = base_model
 
     if training_args.gradient_checkpointing:
         model.enable_input_require_grads()
 
-    train_dataset = TrainDatasetForReranker(args=data_args, tokenizer=tokenizer)
+    if listwise_args.use_listwise_llm_rerank == '1':
+        logger.info(f'you are using ListwiseTrainDatasetForReranker now !!!')
+        train_dataset = ListwiseTrainDatasetForReranker(args=data_args, tokenizer=tokenizer)
+    else:
+        train_dataset = TrainDatasetForReranker(args=data_args, tokenizer=tokenizer)
 
     trainer = BiTrainer(
         model=model,
