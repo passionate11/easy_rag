@@ -1,4 +1,5 @@
 
+from statistics import mode
 import jsonlines
 import time
 from torch import cuda
@@ -7,11 +8,10 @@ from tqdm import tqdm
 from collections import defaultdict
 import os
 import argparse
+import numpy as np
 from FlagEmbedding import BGEM3FlagModel
 from sentence_transformers import SentenceTransformer
-import jieba
-from rank_bm25 import BM25Okapi
-import numpy as np
+from transformers import AutoTokenizer, AutoConfig, AutoModelForCausalLM, AutoModel
 
 device = 'cuda' if cuda.is_available() else 'cpu'
 
@@ -55,13 +55,51 @@ class Scorer():
     # utils
     def compute_cosine_similarity(self, vec1, vec2):
         return (vec1@vec2.T)
+    
+    # from yy
+    def data_pp(self, instruction, tokenizer, eos_token, samples, max_len=8192):
+        instruction = instruction + eos_token
+        instruction_left, instruction_right = instruction.split("{}")
+        token_left = tokenizer.tokenize(instruction_left)
+        token_right = tokenizer.tokenize(instruction_right)
+        len_instruction = len(token_left) + len(token_right)
+        batch_ids, batch_attn = [], []
+        cur_max_len = 0
+        for sample in samples:
+            token = tokenizer.tokenize(sample)[:max_len - len_instruction]
+            ids_all = tokenizer.convert_tokens_to_ids(token_left + token + token_right)
+            attn = [1] * len(ids_all) + [0] * (max_len - len(ids_all))
+            cur_max_len = max(cur_max_len, len(ids_all))
+            ids_all += [tokenizer.pad_token_id] * (max_len - len(ids_all))
+            batch_ids.append(ids_all)
+            batch_attn.append(attn)
+        batch_ids = torch.tensor([x[:cur_max_len] for x in batch_ids])
+        batch_attn = torch.tensor([x[:cur_max_len] for x in batch_attn])
+        inputs = {"input_ids": batch_ids, "attention_mask": batch_attn}
+        emb_token_idx = batch_attn.sum(-1) - 1
+        return inputs, emb_token_idx
 
+    # encode方法记得不要返回张量哦，转为list，.cpu().tolist()
     # encode_method
     def bge_encode(self, model, sentences):
         return model.encode(sentences)
         
     def m3_dense_encode(self, model, sentences):
         return model.encode(sentences, return_dense=True)['dense_vecs']
+    
+    def qwen_instruction_encode(self, model, tokenizer, sentences):
+        instruction_dict = {"emb_instruct_prefix": "请将下面的文本\"", "emb_instruct_postfix": "\"转换成一个词："}
+        instruction = instruction_dict["emb_instruct_prefix"] + "{}" + instruction_dict["emb_instruct_postfix"]
+        eos_token = tokenizer.eos_token
+        encoded_input, emb_token_idx = self.data_pp(instruction, tokenizer, eos_token, sentences)
+        for k, v in encoded_input.items():
+            encoded_input[k] = v.to(device)
+        with torch.no_grad():
+            model_output = model(**encoded_input)[0]
+            embeddings = model_output[torch.arange(model_output.size(0)).unsqueeze(1), emb_token_idx.unsqueeze(1), :].squeeze()
+        
+        embeddings = embeddings.cpu().tolist()
+        return embeddings
 
     def m3_sparse_encode(self, model, sentences):
         return model.encode(sentences, return_dense=False, return_sparse=True, return_colbert_vecs=False)
@@ -69,8 +107,6 @@ class Scorer():
     def m3_multi_vector_encode(self, model, sentences):
         model.encode(sentences, return_dense=False, return_sparse=False, return_colbert_vecs=True)
 
-    # def qwen_encode(self, model, sentences):
-        # encoded_input, emb_token_idx = data_pp()
 
     # m3是混合检索，直接得出最后的结果，TODO 考虑添加dense模式
     def m3_score(self, model, sentence_pairs, weights_for_different_modes=[0.4, 0.2, 0.4]):
@@ -79,35 +115,11 @@ class Scorer():
                         weights_for_different_modes=weights_for_different_modes)['dense']
                         #   ['colbert+sparse+dense']
 
-    def bm25_score(self, model, sentence_pairs):
-        self.model = BM25Okapi()
-
     # 会根据不同的模型类别调用不同的scorer，目前支持bge检索和m3的混合检索
-    def get_retrieval_score(self):
-        print(f'********** using {self.model_type} for scorer **********')
-        if self.model_type == 'bge':
-            model = SentenceTransformer(self.model_path, device=device)
-            self.embedding_scorer(model, self.bge_encode)
-        elif self.model_type == 'm3_dense':
-            model = BGEM3FlagModel(self.model_path, use_fp16=True)
-            self.embedding_scorer(model, self.m3_dense_encode)
-        elif self.model_type == 'm3_sparse':    # TODO sparse和multivector计算最终相似度的分数不一样，这里之后再支持吧
-            model = BGEM3FlagModel(self.model_path, use_fp16=True)
-            self.embedding_scorer(model, self.m3_sparse_encode)
-        elif self.model_type == 'm3_multivector':
-            model = BGEM3FlagModel(self.model_path, use_fp16=True)
-            self.embedding_scorer(model, self.m3_multi_vector_encode)
-        elif self.model_type == 'm3_score':
-            model = BGEM3FlagModel(self.model_path, use_multivector=False, use_sparse=False, use_fp16=True)
-            self.no_embedding_scorer(model, self.m3_score)
-        elif self.model_type == 'sparse-bm25':
-            self.no_embedding_scorer()
-        else:
-            print(f'the model type is wrong ! Please recheck the parameter !')
-    
+
 
     # 将数据embedding化
-    def embedding_data(self, model, encode_func, mode):
+    def embedding_data(self, model, encode_func, mode, tokenizer=None):
         if mode == 'test':
             cur_data = self.data_reader(self.in_test_data)
             inter_save_path = self.inter_test_embedding_path
@@ -131,7 +143,12 @@ class Scorer():
                     break 
                 batch_sent.append(cur_data[i+j]['text'])
                 batch_metadata.append(cur_data[i+j]['metadata'])
-            batch_embedding = encode_func(model, batch_sent)
+            
+            if hasattr(model, 'config') and 'qwen' in model.config.model_type:
+                # print('tokenizer is used, make sure is right behavior~')
+                batch_embedding = encode_func(model, tokenizer, batch_sent)
+            else:
+                batch_embedding = encode_func(model, batch_sent)
 
             # 保存中间结果
             if self.save_intermediate_res is True:
@@ -152,14 +169,16 @@ class Scorer():
         return all_text, all_metadata, all_embedding
     
     # 通过计算embedding 获取 score
-    def embedding_scorer(self, model, encode_func):
+    def embedding_scorer(self, model, encode_func, tokenizer=None):
 
-        test_text, test_metadata, test_embedding = self.embedding_data(model, encode_func, 'test')
-        seed_text, seed_metadata, seed_embedding = self.embedding_data(model, encode_func, 'seed')
-        
+        test_text, test_metadata, test_embedding = self.embedding_data(model, encode_func, 'test', tokenizer)
+        print(type(test_embedding))
+        print(len(test_embedding))
         test_embedding = torch.tensor(test_embedding, dtype=torch.float32, device=device)
-        seed_embedding = torch.tensor(seed_embedding, dtype=torch.float32, device=device)
         test_embedding_normalized = torch.nn.functional.normalize(test_embedding)
+        
+        seed_text, seed_metadata, seed_embedding = self.embedding_data(model, encode_func, 'seed', tokenizer)
+        seed_embedding = torch.tensor(seed_embedding, dtype=torch.float32, device=device)
         seed_embedding_normalized = torch.nn.functional.normalize(seed_embedding)
         
         similarities = self.compute_cosine_similarity(test_embedding_normalized, seed_embedding_normalized)
@@ -207,13 +226,15 @@ class Scorer():
                 writer.write(to_write_data)
 
     # 有的模型直接输出score，没有中间embedding
-    def no_embedding_scorer(self, model=None, score_func=None):
+    def no_embedding_scorer(self, model, score_func):
         # 如果模型直接输出分数而不是embedding，则不能保存中间embedding结果
         self.sava_intermediate_res = False
 
         # TODO 这里记得补全
         test_data = self.data_reader(self.in_test_data)
         seed_data = self.data_reader(self.in_seed_data)
+
+        
 
         test_text, test_metadata = [], []
         seed_text, seed_metadata = [], [] 
@@ -225,47 +246,33 @@ class Scorer():
             seed_metadata.append(tmp['metadata'])
 
         score_list = []
+        progress_bar = tqdm(total=len(test_data), desc="cal m3 sim scores...")
 
-        if self.model_type == 'sparse-bm25':
-            progress_bar = tqdm(total=len(test_data), desc=f"cal {model} sim scores...")
-            tokenized_test_text = [list(jieba.cut(tmp)) for tmp in test_text]
-            tokenized_seed_text = [list(jieba.cut(tmp)) for tmp in seed_text]
-            bm25_model = BM25Okapi(tokenized_seed_text)
-
-            for data in tokenized_test_text:
-                cur_scores = bm25_model.get_scores(data)
-                score_list.append(cur_scores)
-                # print(f'score_list.shape is :{np.array(score_list).shape}')
-                progress_bar.update(1)
-
-        else:   # 一些模型直接输出两个句子的相似性分数
-            progress_bar = tqdm(total=len(test_data), desc=f"cal {model} sim scores...")
-
-            # 为了计算方便，这里的marco_batch 为self.batch_size //  len(seed_data)
-            marco_batch = 1 if self.batch_size < len(seed_data) else self.batch_size // len(seed_text)
+        # 为了计算方便，这里的marco_batch 为self.batch_size //  len(seed_data)
+        marco_batch = 1 if self.batch_size < len(seed_data) else self.batch_size // len(seed_text)
         
-            for marco_idx in range(0, len(test_text), marco_batch):
-                cur_batch = []
-                for tmp in range(marco_batch):
-                    for cur_seed_data in seed_text:
-                        cur_batch.append([test_text[marco_idx+tmp], cur_seed_data])
+        for marco_idx in range(0, len(test_text), marco_batch):
+            cur_batch = []
+            for tmp in range(marco_batch):
+                for cur_seed_data in seed_text:
+                    cur_batch.append([test_text[marco_idx+tmp], cur_seed_data])
 
-                cur_scores = score_func(model=model, sentence_pairs=cur_batch)            
-        
-                seed_len = len(cur_scores) / marco_batch
-                seed_len = int(seed_len)
+            
+            cur_scores = score_func(model=model, sentence_pairs=cur_batch)            
+     
+            seed_len = len(cur_scores) / marco_batch
+            seed_len = int(seed_len)
 
-                for tmp in range(marco_batch):
-                    score_list.append(cur_scores[tmp*seed_len:(tmp+1)*seed_len])
+            for tmp in range(marco_batch):
+                score_list.append(cur_scores[tmp*seed_len:(tmp+1)*seed_len])
 
-                progress_bar.update(marco_batch)
+            progress_bar.update(marco_batch)
 
 
         results = defaultdict(list)
         
         score_list = torch.tensor(score_list)
-        print(f'score_list.shape is :{score_list.shape}')
-        score_list = torch.nn.functional.softmax(score_list, dim=-1)
+        
         top_k_similarities, top_k_indices = torch.topk(score_list, self.topk, dim=1)
         top_k_similarities = top_k_similarities.tolist()
         top_k_indices = top_k_indices.tolist()
@@ -308,6 +315,39 @@ class Scorer():
                 }
                 writer.write(to_write_data)
 
+    def get_retrieval_score(self):
+        if self.model_type == 'bge':
+            print(f'********** using bge_kind_model for scorer **********')
+            model = SentenceTransformer(self.model_path, device=device)
+            self.embedding_scorer(model, self.bge_encode)
+        elif self.model_type == 'm3_dense':
+            print(f'********** using m3_dense for scorer **********')
+            model = BGEM3FlagModel(self.model_path, use_fp16=True)
+            self.embedding_scorer(model, self.m3_dense_encode)
+        elif self.model_type == 'm3_sparse':    # TODO sparse和multivector计算最终相似度的分数不一样，这里之后再支持吧
+            print(f'********** using m3_sparse for scorer **********')
+            model = BGEM3FlagModel(self.model_path, use_fp16=True)
+            self.embedding_scorer(model, self.m3_sparse_encode)
+        elif self.model_type == 'm3_multivector':
+            print(f'********** using m3_multivector for scorer **********')
+            model = BGEM3FlagModel(self.model_path, use_fp16=True)
+            self.embedding_scorer(model, self.m3_multi_vector_encode)
+        elif self.model_type == 'm3_score':
+            print(f'********** using m3_kind_model for scorer **********')
+            model = BGEM3FlagModel(self.model_path, use_multivector=False, use_sparse=False, use_fp16=True)
+            self.no_embedding_scorer(model, self.m3_score)
+        elif self.model_type == 'qwen_instruction':
+            print(f'********** using qwen_instruction for scorer **********')
+            config = AutoConfig.from_pretrained(self.model_path)
+            tokenizer = AutoTokenizer.from_pretrained(self.model_path)
+            # model = AutoModelForCausalLM.from_pretrained(self.model_path, config=config)
+            # model = model.model
+            model = AutoModel.from_pretrained(self.model_path, config=config)
+            model = model.to(device)
+            model.eval()
+            self.embedding_scorer(model, self.qwen_instruction_encode, tokenizer)
+        else:
+            print(f'the model type is wrong ! Please recheck the parameter !')
     
 
 
