@@ -7,9 +7,9 @@ class BiTrainer(Trainer):
     use_lora: bool
 
     def _save(self, output_dir: Optional[str] = None, state_dict=None):
-        if not self.use_lora:
-            super()._save(output_dir, state_dict)
-            return
+        # if not self.use_lora:
+        #     super()._save(output_dir, state_dict)
+        #     return
 
         output_dir = output_dir if output_dir is not None else self.args.output_dir
         os.makedirs(output_dir, exist_ok=True)
