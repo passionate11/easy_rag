@@ -31,6 +31,7 @@ ecom_Rag基于Flagembedding上进行二次开发，致力于提供治理测垂�
 
 
 ## 更新
+- 5/7/2024: retrieve额外支持qwen1.5 encode func，model_type=qwen_instruction
 - 4/26/2024: rerank支持模型添加minicpm-rerank
 - 4/17/2014: 将scripts更名为rag_scripts, 添加2_reranker.py, 支持对多路召回结果进行rerank
     - 支持使用m3-v2-rerank进行精排
