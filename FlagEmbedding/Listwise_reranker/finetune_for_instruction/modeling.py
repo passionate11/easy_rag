@@ -80,6 +80,10 @@ class BiEncoderModel(nn.Module):
              for k,
              v in state_dict.items()})
         self.model.save_pretrained(output_dir, state_dict=state_dict)
+        if self.tokenizer is not None:
+            print('here11')
+            self.tokenizer.save_pretrained(output_dir)
+        
 
     def save_pretrained(self, **kwargs):
         self.tokenizer.save_pretrained(**kwargs)
