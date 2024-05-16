@@ -1,6 +1,7 @@
 import imp
 import logging
 from dataclasses import dataclass
+from os import truncate
 from time import sleep
 from typing import Dict, Optional
 
@@ -422,3 +423,47 @@ class Cocktail_BiEncoderModel(BiEncoderModel):
             q_reps=q_reps,
             p_reps=p_reps,
         )
+
+# 添加head，冻结模型主体参数
+class Bi_lmhead_EncoderModel(BiEncoderModel):
+    def __init__(self,
+                 model_name: str = None,
+                 normlized: bool = False,
+                 sentence_pooling_method: str = 'cls',
+                 negatives_cross_device: bool = False,
+                 temperature: float = 1.0,
+                 use_inbatch_neg: bool = True,
+                 freeze_base_model: bool = False,
+                 ):
+        super().__init__(model_name, normlized, sentence_pooling_method, negatives_cross_device, temperature, use_inbatch_neg)
+
+        hidden_size, laryer_norm_eps, hidden_dropout_prob = self.model.config.hidden_size, self.model.config.layer_norm_eps, self.model.config.hidden_dropout_prob
+
+        self.lm_head = nn.Linear(hidden_size, hidden_size)
+        self.LayerNorm = nn.LayerNorm(hidden_size, eps=laryer_norm_eps)
+        self.dropout = nn.Dropout(hidden_dropout_prob)
+
+        if freeze_base_model:
+            print("freezing base model parameters")
+            for param in self.model.parameters():
+                param.requires_grad = False
+
+    def encode(self, features):
+        super_encode_func_res = super().encode(features)
+        enode_res = self.lm_head(super_encode_func_res)
+        enode_res = self.dropout(enode_res)
+        enode_res = self.LayerNorm(enode_res)
+        return enode_res
+
+    def encode_sentences(self, sentences, tokenizer, device, max_length=512):
+        batch_data = tokenizer(
+            sentences,
+            padding=True,
+            truncation=True,
+            return_tensors='pt',
+            max_length=max_length,
+        ).to(device)
+        
+        output = self.encode(batch_data)
+
+        return output

@@ -69,6 +69,9 @@ class MyCallback(TrainerCallback):
 class BiTrainer(Trainer):
            
     def _save(self, output_dir: Optional[str] = None, state_dict=None):
+        if self.args.lh_head_mode:
+            super()._save(output_dir, state_dict)
+            return 
         if not is_main_process(self.args.local_rank):
             return
         output_dir = output_dir if output_dir is not None else self.args.output_dir

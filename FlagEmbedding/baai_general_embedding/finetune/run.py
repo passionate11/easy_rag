@@ -8,22 +8,33 @@ from transformers import (
     set_seed,
 )
 
-from arguments import ModelArguments, DataArguments, \
-    RetrieverTrainingArguments, SchedulerArguments as TrainingArguments
+from arguments import ModelArguments, DataArguments, SchedulerArguments, \
+    RetrieverTrainingArguments as TrainingArguments
 from data import TrainDatasetForEmbedding, EmbedCollator, BalancedTrainDatasetForEmbedding
-from modeling import BiEncoderModel, my_modified_BiEncoderModel, my_modified_loss_1_BiEncoderModel,my_modified_loss_2_BiEncoderModel,Cocktail_BiEncoderModel
+from modeling import BiEncoderModel, my_modified_BiEncoderModel, my_modified_loss_1_BiEncoderModel,my_modified_loss_2_BiEncoderModel,Cocktail_BiEncoderModel, Bi_lmhead_EncoderModel
 from trainer import BiTrainer, MyCallback, BiTrainer_with_optimizer
 
 logger = logging.getLogger(__name__)
 
-
+# model_dict = {
+#     '':my_modified_loss_2_BiEncoderModel
+# }
+# model = model_dict[conf['model_name']](conf['arg'])
 def main():
-    parser = HfArgumentParser((ModelArguments, SchedulerArguments, DataArguments, TrainingArguments))
-    model_args, scheduler_args, data_args, training_args = parser.parse_args_into_dataclasses()
+    parser = HfArgumentParser((ModelArguments, DataArguments, TrainingArguments))
+    model_args, data_args, training_args = parser.parse_args_into_dataclasses()
     model_args: ModelArguments
     data_args: DataArguments
+    # schedule_args: SchedulerArguments
     training_args: TrainingArguments
 
+    # parser = HfArgumentParser((ModelArguments, DataArguments, SchedulerArguments, TrainingArguments))
+    # model_args, data_args, schedule_args, training_args = parser.parse_args_into_dataclasses()
+    # model_args: ModelArguments
+    # data_args: DataArguments
+    # schedule_args: SchedulerArguments
+    # training_args: TrainingArguments
+    # print(training_args)
     if (
             os.path.exists(training_args.output_dir)
             and os.listdir(training_args.output_dir)
@@ -96,8 +107,8 @@ def main():
                             use_inbatch_neg=training_args.use_inbatch_neg,
                             )
     elif model_args.train_the_cocktail_param == '1':
+        logger.info('use cocktail weights train mode')
         model_list = model_args.cocktail_model_list.split(',')
-        logger.info('train the cocktail param')
         model = Cocktail_BiEncoderModel(model_name=model_args.model_name_or_path,
                             cocktail_model_list=model_list,
                             normlized=training_args.normlized,
@@ -106,7 +117,19 @@ def main():
         
         opti_para_list = [{'params':model.weight_list}]
         cocktail_optimizer = torch.optim.AdamW(opti_para_list)
-
+    elif model_args.lh_head_mode:
+        logger.info('use lm_head_mode train mode')
+        if model_args.lm_head_freeze_base_model:
+            logger.info('basemodel freezed!')
+        training_args.lh_head_mode = model_args.lh_head_mode
+        model = Bi_lmhead_EncoderModel(model_name=model_args.model_name_or_path,
+                            normlized=training_args.normlized,
+                            sentence_pooling_method=training_args.sentence_pooling_method,
+                            negatives_cross_device=training_args.negatives_cross_device,
+                            temperature=training_args.temperature,
+                            use_inbatch_neg=training_args.use_inbatch_neg,
+                            freeze_base_model=model_args.lm_head_freeze_base_model,
+                            )
     else:
         logger.info('use base model')
         model = BiEncoderModel(model_name=model_args.model_name_or_path,
@@ -151,16 +174,20 @@ def main():
             custom_optimizer=cocktail_optimizer,
             tokenizer=tokenizer
         )
-    elif scheduler_args.use_my_wsd_sceduler == '1':
-        logger.info(f'using BiTrainer_with_optimizer')
-        trainer = BiTrainer_with_optimizer(
-            model=model,
-            args=training_args,
-            scheduler_args=scheduler_args,
-            train_dataset=train_dataset,
-            data_collator=EmbedCollator(
-                tokenizer,
-                query_max_len=data_args.query_
+    # elif schedule_args.use_my_wsd_sceduler == '1':
+    #     logger.info(f'using BiTrainer_with_optimizer')
+    #     trainer = BiTrainer_with_optimizer(
+    #         model=model,
+    #         args=training_args,
+    #         scheduler_args=schedule_args,
+    #         train_dataset=train_dataset,
+    #         data_collator=EmbedCollator(
+    #             tokenizer,
+    #             query_max_len=data_args.query_max_len,
+    #             passage_max_len=data_args.passage_max_len
+    #         ),
+    #         tokenizer=tokenizer
+    #     )
     else:
         trainer = BiTrainer(
             model=model,

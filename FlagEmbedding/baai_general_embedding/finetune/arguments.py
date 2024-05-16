@@ -29,13 +29,21 @@ class ModelArguments:
         default='0', metadata={"help": "whether to use my modified loss model, 0:no 1:batch no pos 2:softmax 1"})
     use_balanced_dataset_and_loss: str = field(
         default='0', metadata={"help": "whether to use balanced dataset_and_loss, 0:no 1: yes "})
+
     train_the_cocktail_param: str = field(
         default='0', metadata={"help": "加载多个模型，仅训练cocktail加权权重"})
     cocktail_model_list: str = field(
         default=None, metadata={"help": "cocktail时的多个模型列表"})
 
+    lh_head_mode: Optional[bool] = field(
+        default=False, metadata={"help": "是否训练一个额外的分类lm head做同等维度的映射训练"}
+    )
+    lm_head_freeze_base_model: Optional[bool] = field(
+        default=True, metadata={"help": "lh_head_mode为True时是否冻结base model，默认冻结"}
+    )
+
 @dataclass
-class SchedulerArguments:
+class SchedulerArguments(TrainingArguments):
     """
     Arguments pertaining to which model/config/tokenizer we are going to fine-tune from.
     """
