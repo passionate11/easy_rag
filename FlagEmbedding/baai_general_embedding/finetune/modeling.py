@@ -28,7 +28,7 @@ class BiEncoderModel(nn.Module):
     TRANSFORMER_CLS = AutoModel
 
     def __init__(self,
-                 model_name: str = None,
+                 model_name: str = None, 
                  normlized: bool = False,
                  sentence_pooling_method: str = 'cls',
                  negatives_cross_device: bool = False,
@@ -439,9 +439,13 @@ class Bi_lmhead_EncoderModel(BiEncoderModel):
 
         hidden_size, laryer_norm_eps, hidden_dropout_prob = self.model.config.hidden_size, self.model.config.layer_norm_eps, self.model.config.hidden_dropout_prob
 
-        self.lm_head = nn.Linear(hidden_size, hidden_size)
-        self.LayerNorm = nn.LayerNorm(hidden_size, eps=laryer_norm_eps)
-        self.dropout = nn.Dropout(hidden_dropout_prob)
+        self.lm_head = nn.Sequential(
+            nn.Linear(hidden_size, 4*hidden_size),
+            nn.LayerNorm(4*hidden_size, eps=laryer_norm_eps),
+            nn.Dropout(hidden_dropout_prob),
+            nn.GELU(),
+            nn.Linear(4*hidden_size, hidden_size)
+        )
 
         if freeze_base_model:
             print("freezing base model parameters")
@@ -450,10 +454,12 @@ class Bi_lmhead_EncoderModel(BiEncoderModel):
 
     def encode(self, features):
         super_encode_func_res = super().encode(features)
-        enode_res = self.lm_head(super_encode_func_res)
-        enode_res = self.dropout(enode_res)
-        enode_res = self.LayerNorm(enode_res)
-        return enode_res
+        encode_res = self.lm_head(super_encode_func_res)
+
+        if self.normlized:
+            print(1111)
+            encode_res = torch.nn.functional.normalize(encode_res, dim=-1)
+        return encode_res
 
     def encode_sentences(self, sentences, tokenizer, device, max_length=512):
         batch_data = tokenizer(
