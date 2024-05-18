@@ -28,7 +28,7 @@ class BiEncoderModel(nn.Module):
     TRANSFORMER_CLS = AutoModel
 
     def __init__(self,
-                 model_name: str = None, 
+                 model_name: str = None,
                  normlized: bool = False,
                  sentence_pooling_method: str = 'cls',
                  negatives_cross_device: bool = False,
@@ -457,7 +457,6 @@ class Bi_lmhead_EncoderModel(BiEncoderModel):
         encode_res = self.lm_head(super_encode_func_res)
 
         if self.normlized:
-            print(1111)
             encode_res = torch.nn.functional.normalize(encode_res, dim=-1)
         return encode_res
 

@@ -21,11 +21,11 @@ logger = logging.getLogger(__name__)
 # }
 # model = model_dict[conf['model_name']](conf['arg'])
 def main():
-    parser = HfArgumentParser((ModelArguments, DataArguments, TrainingArguments))
-    model_args, data_args, training_args = parser.parse_args_into_dataclasses()
+    parser = HfArgumentParser((ModelArguments, DataArguments,SchedulerArguments, TrainingArguments))
+    model_args, data_args, schedule_args, training_args = parser.parse_args_into_dataclasses()
     model_args: ModelArguments
     data_args: DataArguments
-    # schedule_args: SchedulerArguments
+    schedule_args: SchedulerArguments
     training_args: TrainingArguments
 
     # parser = HfArgumentParser((ModelArguments, DataArguments, SchedulerArguments, TrainingArguments))
@@ -121,7 +121,6 @@ def main():
         logger.info('use lm_head_mode train mode')
         if model_args.lm_head_freeze_base_model:
             logger.info('basemodel freezed!')
-        training_args.lh_head_mode = model_args.lh_head_mode
         model = Bi_lmhead_EncoderModel(model_name=model_args.model_name_or_path,
                             normlized=training_args.normlized,
                             sentence_pooling_method=training_args.sentence_pooling_method,
@@ -139,6 +138,8 @@ def main():
                             temperature=training_args.temperature,
                             use_inbatch_neg=training_args.use_inbatch_neg,
                             )
+
+    training_args.lh_head_mode = model_args.lh_head_mode
 
     if training_args.fix_position_embedding:
         for k, v in model.named_parameters():
@@ -174,20 +175,20 @@ def main():
             custom_optimizer=cocktail_optimizer,
             tokenizer=tokenizer
         )
-    # elif schedule_args.use_my_wsd_sceduler == '1':
-    #     logger.info(f'using BiTrainer_with_optimizer')
-    #     trainer = BiTrainer_with_optimizer(
-    #         model=model,
-    #         args=training_args,
-    #         scheduler_args=schedule_args,
-    #         train_dataset=train_dataset,
-    #         data_collator=EmbedCollator(
-    #             tokenizer,
-    #             query_max_len=data_args.query_max_len,
-    #             passage_max_len=data_args.passage_max_len
-    #         ),
-    #         tokenizer=tokenizer
-    #     )
+    elif schedule_args.use_my_wsd_sceduler == '1':
+        logger.info(f'using BiTrainer_with_optimizer')
+        trainer = BiTrainer_with_optimizer(
+            model=model,
+            args=training_args,
+            scheduler_args=schedule_args,
+            train_dataset=train_dataset,
+            data_collator=EmbedCollator(
+                tokenizer,
+                query_max_len=data_args.query_max_len,
+                passage_max_len=data_args.passage_max_len
+            ),
+            tokenizer=tokenizer
+        )
     else:
         trainer = BiTrainer(
             model=model,
