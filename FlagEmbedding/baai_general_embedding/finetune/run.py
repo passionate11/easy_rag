@@ -13,13 +13,11 @@ from arguments import ModelArguments, DataArguments, SchedulerArguments, \
 from data import TrainDatasetForEmbedding, EmbedCollator, BalancedTrainDatasetForEmbedding
 from modeling import BiEncoderModel, my_modified_BiEncoderModel, my_modified_loss_1_BiEncoderModel,my_modified_loss_2_BiEncoderModel,Cocktail_BiEncoderModel, Bi_lmhead_EncoderModel
 from trainer import BiTrainer, MyCallback, BiTrainer_with_optimizer
+from load_llm_model import get_llm_model
 
 logger = logging.getLogger(__name__)
 
-# model_dict = {
-#     '':my_modified_loss_2_BiEncoderModel
-# }
-# model = model_dict[conf['model_name']](conf['arg'])
+
 def main():
     parser = HfArgumentParser((ModelArguments, DataArguments,SchedulerArguments, TrainingArguments))
     model_args, data_args, schedule_args, training_args = parser.parse_args_into_dataclasses()
@@ -28,13 +26,6 @@ def main():
     schedule_args: SchedulerArguments
     training_args: TrainingArguments
 
-    # parser = HfArgumentParser((ModelArguments, DataArguments, SchedulerArguments, TrainingArguments))
-    # model_args, data_args, schedule_args, training_args = parser.parse_args_into_dataclasses()
-    # model_args: ModelArguments
-    # data_args: DataArguments
-    # schedule_args: SchedulerArguments
-    # training_args: TrainingArguments
-    # print(training_args)
     if (
             os.path.exists(training_args.output_dir)
             and os.listdir(training_args.output_dir)
@@ -89,6 +80,10 @@ def main():
                             temperature=training_args.temperature,
                             use_inbatch_neg=training_args.use_inbatch_neg,
                             )
+    elif model_args.llm_embedding_mode: # 用llm作为embedding的base模型
+        logger.info('use llm as embedding base model')
+        base_model = get_llm_model(model_args, training_args)
+        
     elif model_args.use_my_modified_loss_model == '2':
         logger.info('use my softmax modified loss model')
         model = my_modified_loss_1_BiEncoderModel(model_name=model_args.model_name_or_path,

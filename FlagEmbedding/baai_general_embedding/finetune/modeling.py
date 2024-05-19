@@ -472,3 +472,43 @@ class Bi_lmhead_EncoderModel(BiEncoderModel):
         output = self.encode(batch_data)
 
         return output
+
+class Bi_llm_EncoderModel(BiEncoderModel):
+    def __init__(self,
+                 model_name: str = None,
+                 llm_embedding_token_type: str = 'eos',
+                 normlized: bool = False,
+                 sentence_pooling_method: str = 'cls',
+                 negatives_cross_device: bool = False,
+                 temperature: float = 1.0,
+                 use_inbatch_neg: bool = True
+                 ):
+        super().__init__()
+        self.model = model_name
+        self.llm_embedding_token_type = llm_embedding_token_type
+        
+        self.normlized = normlized
+        self.sentence_pooling_method = sentence_pooling_method
+        self.negatives_cross_device = negatives_cross_device
+        self.temperature = temperature
+        self.use_inbatch_neg = use_inbatch
+
+        if not normlized:
+            self.temperature = 1.0
+            logger.info("reset temperature = 1.0 due to using inner product to compute similarity")
+        if normlized:
+            if self.temperature > 0.5:
+                raise ValueError("Temperature should be smaller than 1.0 when use cosine similarity (i.e., normlized=True). Recommend to set it 0.01-0.1")
+
+        self.negatives_cross_device = negatives_cross_device
+        if self.negatives_cross_device:
+            if not dist.is_initialized():
+                raise ValueError('Distributed training has not been initialized for representation all gather.')
+            #     logger.info("Run in a single GPU, set negatives_cross_device=False")
+            #     self.negatives_cross_device = False
+            # else:
+            self.process_rank = dist.get_rank()
+            self.world_size = dist.get_world_size()
+
+    def encode(self, features):
+        pass

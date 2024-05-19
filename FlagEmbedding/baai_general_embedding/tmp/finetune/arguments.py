@@ -1,9 +1,12 @@
-from email.policy import default
 import os
+from typing import Optional, List
 from dataclasses import dataclass, field
 from typing import Optional
-import typing
+
 from transformers import TrainingArguments
+
+def default_list() -> List[str]:
+    return ["q_proj", "v_proj", "o_proj", "down_proj", "up_proj", "gate_proj"]
 
 
 @dataclass
@@ -24,44 +27,36 @@ class ModelArguments:
     cache_dir: Optional[str] = field(
         default=None, metadata={"help": "Where do you want to store the pretrained models downloaded from s3"}
     )
-    # my arguments
-    use_my_modified_loss_model: str = field(
-        default='0', metadata={"help": "whether to use my modified loss model, 0:no 1:batch no pos 2:softmax 1"})
-    use_balanced_dataset_and_loss: str = field(
-        default='0', metadata={"help": "whether to use balanced dataset_and_loss, 0:no 1: yes "})
-
-    train_the_cocktail_param: str = field(
-        default='0', metadata={"help": "加载多个模型,仅训练cocktail加权权重"})
-    cocktail_model_list: str = field(
-        default=None, metadata={"help": "cocktail时的多个模型列表"})
-
-    lh_head_mode: Optional[bool] = field(
-        default=False, metadata={"help": "是否训练一个额外的分类lm head做同等维度的映射训练"}
+    from_peft: str = field(
+        default=None
     )
-    lm_head_freeze_base_model: Optional[bool] = field(
-        default=True, metadata={"help": "lh_head_mode为True时是否冻结base model,默认冻结"}
+    use_lora: bool = field(
+        default=True,
+        metadata={"help": "If passed, will use LORA (low-rank parameter-efficient training) to train the model."}
     )
-    llm_embedding_mode: Optional[bool] = field(
-        default=False, metadata={"help": "是否使用llm作为embedding base模型"}
+    lora_rank: int = field(
+        default=64,
+        metadata={"help": "The rank of lora."}
     )
-    llm_embedding_token_type: Optional[str] = field(
-        default='eos', metadata={"help": "llm_embedding_mode为True时, 使用什么作为embedding的向量, 默认为eos"}
+    lora_alpha: float = field(
+        default=16,
+        metadata={"help": "The alpha parameter of lora."}
     )
-    
-
-@dataclass
-class SchedulerArguments:
-    """
-    Arguments pertaining to which model/config/tokenizer we are going to fine-tune from.
-    """
-    use_my_wsd_sceduler: str = field(
-        default='0', metadata={"help": "whether to use my wsd scheduler, 0:no 1: yes "})
-    # for adamw
-    stable_ratio: float = field(
-        default=0.1, metadata={"help": "the stable ratio for wsd scheduler"}
+    lora_dropout: float = field(
+        default=0.1,
+        metadata={"help": "The dropout rate of lora modules."}
+    )
+    target_modules: List[str] = field(
+        default_factory=default_list
+    )
+    lora_extra_parameters: str = field(
+        default=None
+    )
+    trust_remote_code: bool = field(
+        default=True
     )
 
-    
+
 @dataclass
 class DataArguments:
     train_data: str = field(
@@ -83,6 +78,10 @@ class DataArguments:
             "help": "The maximum total input sequence length after tokenization for passage. Sequences longer "
                     "than this will be truncated, sequences shorter will be padded."
         },
+    )
+    
+    use_model_type: str = field(
+        default=None,metadata={"help": "Model type(gist/base) to train"}
     )
 
     max_example_num_per_dataset: int = field(
