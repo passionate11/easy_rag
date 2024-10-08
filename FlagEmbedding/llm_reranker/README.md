@@ -3,6 +3,7 @@
 - [Model List](#model-list)
 - [Usage](#usage)
 - [Fine-tuning](#fine-tune)
+- [Evaluate Script](#evaluate-script)
 - [Evaluation](#evaluation)
 - [Citation](#citation)
 
@@ -251,7 +252,11 @@ See [toy_finetune_data.jsonl](https://github.com/FlagOpen/FlagEmbedding/tree/mas
 
 You can fine-tune the reranker with the following code:
 
-**For llm-based reranker**
+**For normal reranker** (bge-reranker-base / bge-reranker-large / bge-reranker-v2-m3 )
+
+Refer to: https://github.com/FlagOpen/FlagEmbedding/tree/master/examples/reranker
+
+**For llm-based reranker** (bge-reranker-v2-gemma)
 
 ```shell
 torchrun --nproc_per_node {number of gpus} \
@@ -282,7 +287,7 @@ torchrun --nproc_per_node {number of gpus} \
 --target_modules q_proj k_proj v_proj o_proj
 ```
 
-**For llm-based layerwise reranker**
+**For llm-based layerwise reranker** (bge-reranker-v2-minicpm-layerwise) 
 
 ```shell
 torchrun --nproc_per_node {number of gpus} \
@@ -350,6 +355,32 @@ If you finetune the finetuned model (BAAI/bge-reranker-v2-minicpm-layerwise)
 from FlagEmbedding.llm_reranker.merge import merge_layerwise_finetuned_llm
 merge_layerwise_finetuned_llm('BAAI/bge-reranker-v2-minicpm-layerwise', 'lora_llm_output_path', 'merged_model_output_paths')
 ```
+
+Then you can replace the `config.json` in `merged_model_output_paths` with the `config.json` from [BAAI/bge-reranker-v2-minicpm-layerwise.](https://huggingface.co/BAAI/bge-reranker-v2-minicpm-layerwise/blob/main/config.json)
+
+### Load llm-based layerwise reranker in local
+
+If you download reranker-v2-minicpm-layerwise, you can load it with the following method:
+1. make sure `configuration_minicpm_reranker.py` and `modeling_minicpm_reranker.py` in `/path/bge-reranker-v2-minicpm-layerwise`.
+2. modify the following part of `config.json`:
+```
+"auto_map": {
+    "AutoConfig": "configuration_minicpm_reranker.LayerWiseMiniCPMConfig",
+    "AutoModel": "modeling_minicpm_reranker.LayerWiseMiniCPMModel",
+    "AutoModelForCausalLM": "modeling_minicpm_reranker.LayerWiseMiniCPMForCausalLM"
+  },
+```
+
+## Evaluate Script
+
+```shell
+python evaluate.py \
+--input_path ./toy_finetune_data.jsonl \
+--metrics mrr recall ndcg map precision \
+--k_values 1 10 100
+```
+
+If you want to use another reranker, please replace `reranker = FlagReranker('BAAI/bge-reranker-v2-m3', cache_dir=cache_dir, use_fp16=use_fp16)` with your own reranker.
 
 ## Evaluation
 
