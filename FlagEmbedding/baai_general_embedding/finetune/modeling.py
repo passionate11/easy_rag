@@ -476,10 +476,13 @@ class Bi_lmhead_EncoderModel(BiEncoderModel):
 
         return output
 
-class Bi_llm_EncoderModel(BiEncoderModel):
+
+
+class Bi_llm_head_EncoderModel(BiEncoderModel):
     def __init__(self,
                  model_name: str = None,
                  llm_embedding_token_type: str = 'eos',
+                 encode_head_size: int =128,
                  normlized: bool = False,
                  sentence_pooling_method: str = 'cls',
                  negatives_cross_device: bool = False,
@@ -487,8 +490,8 @@ class Bi_llm_EncoderModel(BiEncoderModel):
                  use_inbatch_neg: bool = True
                  ):
         super().__init__()
-        self.model = model_name
-        self.llm_embedding_token_type = llm_embedding_token_type
+        self.model = model_name # 直接传入模型
+        self.llm_embedding_token_type = llm_embedding_token_type        # bos or special
         
         self.normlized = normlized
         self.sentence_pooling_method = sentence_pooling_method
@@ -513,5 +516,48 @@ class Bi_llm_EncoderModel(BiEncoderModel):
             self.process_rank = dist.get_rank()
             self.world_size = dist.get_world_size()
 
+        hidden_size = self.model.config.hidden_size
+        self.lm_head = nn.Sequential(
+            nn.Linear(hidden_size, encode_head_size)
+        )
+        # if freeze_base_model:
+        #     print("freezing base model parameters")
+        #     for param in self.model.parameters():
+        #         param.requires_grad = False
+
     def encode(self, features):
-        pass
+        embeddings = []
+        psg_out = self.model(**features, return_dict=True)
+        psg_out = self.lm_head(psg_out) # bsz seq_len head_size
+        # 提取embeddings 
+        total_len = features['attention_mask'].sum(dim=-1)  # bsz
+
+        if llm_embedding_token_type == 'eos':
+            # emb_token idx 
+            emb_token_idx = total_len - 1
+        elif llm_embedding_token_type == 'special':
+            emb_token_idx = total_len - 2 
+        else:
+            raise ValueError('only support [eos, special], contact with hpc for more tech supports')
+
+        bsz = psg_out.size(0)
+        batch_indices = torch.arange(bsz)
+
+        # bsz, head_size
+        p_reps = psg_out[batch_indices, emb_token_idx]
+        if self.normlized:
+            p_reps = torch.nn.functional.normalize(p_reps, dim=-1)
+        return p_reps.contiguous()
+        
+    # def encode_sentences(self, sentences, tokenizer, device, max_length=512):
+    #     batch_data = tokenizer(
+    #         sentences,
+    #         padding=True,
+    #         truncation=True,
+    #         return_tensors='pt',
+    #         max_length=max_length,
+    #     ).to(device)
+        
+    #     output = self.encode(batch_data)
+
+    #     return output

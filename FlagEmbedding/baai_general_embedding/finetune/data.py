@@ -166,3 +166,33 @@ class BalancedTrainDatasetForEmbedding(Dataset):
         if self.args.passage_instruction_for_retrieval is not None:
             passages = [self.args.passage_instruction_for_retrieval+p for p in passages]
         return query, passages
+
+
+class LlmEmbedCollator(EmbedCollator):
+    def tokenize_qp(self, qb_data):
+        # 只支持qwen
+        prompt = '<|im_start|>将下面这个query压缩成一个单词\nquery：{query}\n压缩后的单词：<|emb_0|><|im_end|>'
+        prompt_list = []
+        for data in qb_data:
+            prompt_list.append(prompt.format(query=data))
+        qp_collated = self.tokenizer(
+            prompt_list,
+            padding=True,
+            truncation=True,
+            max_length=self.query_max_len,
+            return_tensors="pt",
+        )
+        return qp_collated
+    def __call__(self, features):
+        query = [f[0] for f in features]
+        passage = [f[1] for f in features]
+
+        if isinstance(query[0], list):
+            query = sum(query, [])
+        if isinstance(passage[0], list):
+            passage = sum(passage, [])
+
+        q_collated = self.tokenize_qp(query)
+        d_collated = self.tokenize_qp(passage)
+
+        return {"query": q_collated, "passage": d_collated}

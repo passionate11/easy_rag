@@ -1,13 +1,13 @@
 import torch
-from transformers import AutoModelForCausalLM
+from transformers import AutoModelForCausalLM, AutoModel
 from peft import LoraConfig, TaskType, get_peft_model, PeftModel
 
 
 def get_llm_model(model_args, training_args):
-    model = AutoModelForCausalLM.from_pretrained(
+    model = AutoModel.from_pretrained(
         model_args.model_name_or_path,
         torch_dtype=torch.float16 if training_args.fp16 else torch.bfloat16,
-        # use_flash_attention_2=True if model_args.use_flash_attn else False,
+        use_flash_attention_2=True, #  if model_args.use_flash_attn else False,
         # token=model_args.token,
         # cache_dir=model_args.cache_dir,
         # from_tf=bool(".ckpt" in model_args.model_name_or_path),
@@ -31,6 +31,5 @@ def get_llm_model(model_args, training_args):
             )
             model = get_peft_model(model, peft_config)
             model.print_trainable_parameters()
-
 
     return model

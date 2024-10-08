@@ -10,7 +10,7 @@ from transformers import (
 
 from arguments import ModelArguments, DataArguments, SchedulerArguments, \
     RetrieverTrainingArguments as TrainingArguments
-from data import TrainDatasetForEmbedding, EmbedCollator, BalancedTrainDatasetForEmbedding
+from data import TrainDatasetForEmbedding, EmbedCollator, BalancedTrainDatasetForEmbedding, LlmEmbedCollator
 from modeling import BiEncoderModel, my_modified_BiEncoderModel, my_modified_loss_1_BiEncoderModel,my_modified_loss_2_BiEncoderModel,Cocktail_BiEncoderModel, Bi_lmhead_EncoderModel
 from trainer import BiTrainer, MyCallback, BiTrainer_with_optimizer
 from load_llm_model import get_llm_model
@@ -80,10 +80,22 @@ def main():
                             temperature=training_args.temperature,
                             use_inbatch_neg=training_args.use_inbatch_neg,
                             )
-    elif model_args.llm_embedding_mode: # 用llm作为embedding的base模型
-        logger.info('use llm as embedding base model')
+    # elif model_args.llm_embedding_mode: # 用llm作为embedding的base模型
+    #     logger.info('use llm as embedding base model')
+    #     base_model = get_llm_model(model_args, training_args)
+    #     model = 
+    elif model_args.llm_head_embedding_mode:
+        logger.info('正在使用llm + head作为embedding base模型')
         base_model = get_llm_model(model_args, training_args)
-        
+        model = Bi_llm_head_EncoderModel(model_name=model_args.model_name_or_path,
+            llm_embedding_token_type='special',
+            encode_head_size=128,
+            normlized=training_args.normlized,
+            sentence_pooling_method=training_args.sentence_pooling_method,
+            negatives_cross_device=training_args.negatives_cross_device,
+            temperature=training_args.temperature,
+            use_inbatch_neg=training_args.use_inbatch_neg,
+        )
     elif model_args.use_my_modified_loss_model == '2':
         logger.info('use my softmax modified loss model')
         model = my_modified_loss_1_BiEncoderModel(model_name=model_args.model_name_or_path,
@@ -142,12 +154,12 @@ def main():
                 logging.info(f"Freeze the parameters for {k}")
                 v.requires_grad = False
 
-    if model_args.use_balanced_dataset_and_loss == '0':
-        logger.info('dataset: TrainDatasetForEmbedding')
-        train_dataset = TrainDatasetForEmbedding(args=data_args, tokenizer=tokenizer)
-    elif model_args.use_balanced_dataset_and_loss == '1':
+    if model_args.use_balanced_dataset_and_loss == '1':
         logger.info('dataset: BalancedTrainDatasetForEmbedding')
         train_dataset = BalancedTrainDatasetForEmbedding(args=data_args, tokenizer=tokenizer)
+    else:
+        logger.info('dataset: TrainDatasetForEmbedding（正常模式）')
+        train_dataset = TrainDatasetForEmbedding(args=data_args, tokenizer=tokenizer)
 
     # resume_from_checkpoint
     save_strategy = training_args.save_strategy
@@ -178,6 +190,18 @@ def main():
             scheduler_args=schedule_args,
             train_dataset=train_dataset,
             data_collator=EmbedCollator(
+                tokenizer,
+                query_max_len=data_args.query_max_len,
+                passage_max_len=data_args.passage_max_len
+            ),
+            tokenizer=tokenizer
+        )
+    elif model_args.llm_head_embedding_mode or model_args.llm_embedding_mode:
+        trainer = BiTrainer(
+            model=model,
+            args=training_args,
+            train_dataset=train_dataset,
+            data_collator=LlmEmbedCollator(
                 tokenizer,
                 query_max_len=data_args.query_max_len,
                 passage_max_len=data_args.passage_max_len

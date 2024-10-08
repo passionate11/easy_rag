@@ -44,6 +44,9 @@ class ModelArguments:
     llm_embedding_mode: Optional[bool] = field(
         default=False, metadata={"help": "是否使用llm作为embedding base模型"}
     )
+    llm_head_embedding_mode: Optional[bool] = field(
+        default=False, metadata={"help": "是否使用llm加一个head作为embedding base模型"}
+    )
     llm_embedding_token_type: Optional[str] = field(
         default='eos', metadata={"help": "llm_embedding_mode为True时, 使用什么作为embedding的向量, 默认为eos"}
     )
