@@ -11,7 +11,7 @@ from transformers import (
 from arguments import ModelArguments, DataArguments, SchedulerArguments, \
     RetrieverTrainingArguments as TrainingArguments
 from data import TrainDatasetForEmbedding, EmbedCollator, BalancedTrainDatasetForEmbedding, LlmEmbedCollator
-from modeling import BiEncoderModel, my_modified_BiEncoderModel, my_modified_loss_1_BiEncoderModel,my_modified_loss_2_BiEncoderModel,Cocktail_BiEncoderModel, Bi_lmhead_EncoderModel
+from modeling import BiEncoderModel, my_modified_BiEncoderModel, my_modified_loss_1_BiEncoderModel,my_modified_loss_2_BiEncoderModel,Cocktail_BiEncoderModel, Bi_lmhead_EncoderModel, Bi_llm_head_EncoderModel
 from trainer import BiTrainer, MyCallback, BiTrainer_with_optimizer
 from load_llm_model import get_llm_model
 
@@ -86,7 +86,6 @@ def main():
     #     model = 
     elif model_args.llm_head_embedding_mode:
         logger.info('正在使用llm + head作为embedding base模型')
-        base_model = get_llm_model(model_args, training_args)
         model = Bi_llm_head_EncoderModel(model_name=model_args.model_name_or_path,
             llm_embedding_token_type='special',
             encode_head_size=128,
@@ -146,7 +145,8 @@ def main():
                             use_inbatch_neg=training_args.use_inbatch_neg,
                             )
 
-    training_args.lh_head_mode = model_args.lh_head_mode
+    if model_args.lh_head_mode or model_args.llm_head_embedding_mode:
+        training_args.lh_head_mode = True
 
     if training_args.fix_position_embedding:
         for k, v in model.named_parameters():
@@ -197,6 +197,7 @@ def main():
             tokenizer=tokenizer
         )
     elif model_args.llm_head_embedding_mode or model_args.llm_embedding_mode:
+        logger.info(f'using BiTrainer(正常的trainer with LlmEmbedCollator)')
         trainer = BiTrainer(
             model=model,
             args=training_args,
@@ -220,7 +221,6 @@ def main():
             ),
             tokenizer=tokenizer
         )
-
 
     Path(training_args.output_dir).mkdir(parents=True, exist_ok=True)
 

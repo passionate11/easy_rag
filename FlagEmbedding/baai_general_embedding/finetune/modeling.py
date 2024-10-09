@@ -36,14 +36,16 @@ class BiEncoderModel(nn.Module):
                  use_inbatch_neg: bool = True
                  ):
         super().__init__()
-        self.model = AutoModel.from_pretrained(model_name)
+        if model_name:
+            self.model = AutoModel.from_pretrained(model_name)
+            self.config = self.model.config
         self.cross_entropy = nn.CrossEntropyLoss(reduction='mean')
 
         self.normlized = normlized
         self.sentence_pooling_method = sentence_pooling_method
         self.temperature = temperature
         self.use_inbatch_neg = use_inbatch_neg
-        self.config = self.model.config
+        
 
         if not normlized:
             self.temperature = 1.0
@@ -480,7 +482,7 @@ class Bi_lmhead_EncoderModel(BiEncoderModel):
 
 class Bi_llm_head_EncoderModel(BiEncoderModel):
     def __init__(self,
-                 model_name: str = None,
+                 model_name: str=None,
                  llm_embedding_token_type: str = 'eos',
                  encode_head_size: int =128,
                  normlized: bool = False,
@@ -489,53 +491,26 @@ class Bi_llm_head_EncoderModel(BiEncoderModel):
                  temperature: float = 1.0,
                  use_inbatch_neg: bool = True
                  ):
-        super().__init__()
-        self.model = model_name # 直接传入模型
+
+        super().__init__(model_name, normlized, sentence_pooling_method, negatives_cross_device, temperature, use_inbatch_neg)
         self.llm_embedding_token_type = llm_embedding_token_type        # bos or special
         
-        self.normlized = normlized
-        self.sentence_pooling_method = sentence_pooling_method
-        self.negatives_cross_device = negatives_cross_device
-        self.temperature = temperature
-        self.use_inbatch_neg = use_inbatch
-
-        if not normlized:
-            self.temperature = 1.0
-            logger.info("reset temperature = 1.0 due to using inner product to compute similarity")
-        if normlized:
-            if self.temperature > 0.5:
-                raise ValueError("Temperature should be smaller than 1.0 when use cosine similarity (i.e., normlized=True). Recommend to set it 0.01-0.1")
-
-        self.negatives_cross_device = negatives_cross_device
-        if self.negatives_cross_device:
-            if not dist.is_initialized():
-                raise ValueError('Distributed training has not been initialized for representation all gather.')
-            #     logger.info("Run in a single GPU, set negatives_cross_device=False")
-            #     self.negatives_cross_device = False
-            # else:
-            self.process_rank = dist.get_rank()
-            self.world_size = dist.get_world_size()
-
         hidden_size = self.model.config.hidden_size
         self.lm_head = nn.Sequential(
             nn.Linear(hidden_size, encode_head_size)
         )
-        # if freeze_base_model:
-        #     print("freezing base model parameters")
-        #     for param in self.model.parameters():
-        #         param.requires_grad = False
 
     def encode(self, features):
         embeddings = []
         psg_out = self.model(**features, return_dict=True)
-        psg_out = self.lm_head(psg_out) # bsz seq_len head_size
+        psg_out = self.lm_head(psg_out.last_hidden_state) # bsz seq_len head_size
         # 提取embeddings 
         total_len = features['attention_mask'].sum(dim=-1)  # bsz
 
-        if llm_embedding_token_type == 'eos':
+        if self.llm_embedding_token_type == 'eos':
             # emb_token idx 
             emb_token_idx = total_len - 1
-        elif llm_embedding_token_type == 'special':
+        elif self.llm_embedding_token_type == 'special':
             emb_token_idx = total_len - 2 
         else:
             raise ValueError('only support [eos, special], contact with hpc for more tech supports')
@@ -548,7 +523,7 @@ class Bi_llm_head_EncoderModel(BiEncoderModel):
         if self.normlized:
             p_reps = torch.nn.functional.normalize(p_reps, dim=-1)
         return p_reps.contiguous()
-        
+
     # def encode_sentences(self, sentences, tokenizer, device, max_length=512):
     #     batch_data = tokenizer(
     #         sentences,
