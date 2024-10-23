@@ -92,7 +92,7 @@ class BiEncoderModel(nn.Module):
     def forward(self, query: Dict[str, Tensor] = None, passage: Dict[str, Tensor] = None, teacher_score: Tensor = None):
         q_reps = self.encode(query)
         p_reps = self.encode(passage)
-
+        # 
         if self.training:
             if self.negatives_cross_device and self.use_inbatch_neg:
                 q_reps = self._dist_gather_tensor(q_reps)
@@ -494,7 +494,6 @@ class Bi_llm_head_EncoderModel(BiEncoderModel):
 
         super().__init__(model_name, normlized, sentence_pooling_method, negatives_cross_device, temperature, use_inbatch_neg)
         self.llm_embedding_token_type = llm_embedding_token_type        # bos or special
-        
         hidden_size = self.model.config.hidden_size
         self.lm_head = nn.Sequential(
             nn.Linear(hidden_size, encode_head_size)
@@ -524,15 +523,17 @@ class Bi_llm_head_EncoderModel(BiEncoderModel):
             p_reps = torch.nn.functional.normalize(p_reps, dim=-1)
         return p_reps.contiguous()
 
-    # def encode_sentences(self, sentences, tokenizer, device, max_length=512):
-    #     batch_data = tokenizer(
-    #         sentences,
-    #         padding=True,
-    #         truncation=True,
-    #         return_tensors='pt',
-    #         max_length=max_length,
-    #     ).to(device)
-        
-    #     output = self.encode(batch_data)
+    def encode_sentences(self, sentences, tokenizer, max_length=512):
+        prompt = '<|im_start|>将下面这个query压缩成一个单词\nquery：{query}\n压缩后的单词：<|emb_0|><|im_end|>'
+        prompt_list = []
+        for data in sentences:
+            prompt_list.append(prompt.format(query=data))
+        qp_collated = tokenizer(
+            prompt_list,
+            padding=True,
+            truncation=True,
+            max_length=max_length,
+            return_tensors="pt",
+        )
 
-    #     return output
+        return self.encode(qp_collated)

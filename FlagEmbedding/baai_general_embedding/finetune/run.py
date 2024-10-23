@@ -87,7 +87,7 @@ def main():
     elif model_args.llm_head_embedding_mode:
         logger.info('正在使用llm + head作为embedding base模型')
         model = Bi_llm_head_EncoderModel(model_name=model_args.model_name_or_path,
-            llm_embedding_token_type='special',
+            llm_embedding_token_type=model_args.llm_embedding_token_type,
             encode_head_size=128,
             normlized=training_args.normlized,
             sentence_pooling_method=training_args.sentence_pooling_method,
@@ -95,6 +95,25 @@ def main():
             temperature=training_args.temperature,
             use_inbatch_neg=training_args.use_inbatch_neg,
         )
+        if model_args.llm_embedding_token_type == 'special':
+            # 注册special emb token
+            existing_special_tokens = tokenizer.additional_special_tokens
+            new_special_tokens = '<|emb_0|>'
+            if new_special_tokens not in existing_special_tokens:
+                existing_special_tokens.append(new_special_tokens)
+                tokenizer.add_special_tokens({'additional_special_tokens': existing_special_tokens})
+            if len(tokenizer) + 1 < model.model.embed_tokens.weight.shape[0]:
+                logger.info('模型embedding size足够大，无需reshape')
+                logger.info(f'当前tokenizer大小:{len(tokenizer)}')
+                logger.info(f'当前模型embedding大小:{model.model.embed_tokens.weight.shape[0]}')
+            else:
+                logger.info('模型embedding size不够大，请不要这么做，再想想办法吧')
+                logger.info(f'当前tokenizer大小:{len(tokenizer)}')
+                logger.info(f'当前模型embedding大小:{model.model.embed_tokens.weight.shape[0]}')
+                exit()
+                cur_size = model.model.embed_tokens.weight.shape[0] // 128
+                model.model.resize_token_embeddings(128 * (cur_size + 1))
+            logger.info('<|emb_0|>已启用')
     elif model_args.use_my_modified_loss_model == '2':
         logger.info('use my softmax modified loss model')
         model = my_modified_loss_1_BiEncoderModel(model_name=model_args.model_name_or_path,
@@ -147,6 +166,8 @@ def main():
 
     if model_args.lh_head_mode or model_args.llm_head_embedding_mode:
         training_args.lh_head_mode = True
+    else:
+        training_args.lh_head_mode = False
 
     if training_args.fix_position_embedding:
         for k, v in model.named_parameters():
@@ -210,6 +231,7 @@ def main():
             tokenizer=tokenizer
         )
     else:
+        logger.info(f'using BiTrainer(常规bge模式)')
         trainer = BiTrainer(
             model=model,
             args=training_args,

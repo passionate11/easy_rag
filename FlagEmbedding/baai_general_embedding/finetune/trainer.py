@@ -73,7 +73,6 @@ class BiTrainer(Trainer):
             logger.info('lm_head save mode!!!')
             self.model.config.save_pretrained(output_dir)
             super()._save(output_dir, state_dict)
-            
             return 
         if not is_main_process(self.args.local_rank):
             return
